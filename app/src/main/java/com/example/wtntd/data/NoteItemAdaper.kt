@@ -12,7 +12,6 @@ class NoteItemAdapter: RecyclerView.Adapter<NoteItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
 
-//        return NoteItemViewHolder(View.inflate(parent.context,R.layout.recycler_view,parent))//fixme parent.inflate
         return NoteItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recycler_view,parent,false))
     }
 

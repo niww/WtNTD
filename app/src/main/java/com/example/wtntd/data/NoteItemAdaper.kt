@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class NoteItemAdapter: RecyclerView.Adapter<NoteItemViewHolder>() {
-    val list = mutableListOf<String>("12","sdsd","Work")
+class NoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<NoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
@@ -16,12 +15,13 @@ class NoteItemAdapter: RecyclerView.Adapter<NoteItemViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return list.size
+//        return list.size
+        return listNotes.size
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
-        holder.textNoteItem.text = list[position].toString()
+        holder.textNoteItem.text = listNotes[position]
     }
 
 

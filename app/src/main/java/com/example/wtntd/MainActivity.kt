@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whntd.data.NoteItemAdapter
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -18,25 +19,12 @@ class MainActivity : AppCompatActivity() {
 
 
         val TAG = "TAGG"
-        val db = Firebase.firestore
+        val database = Firebase.database
+        val myDB = database.getReference("ListNotes")
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         val list = mutableListOf("12", "sdsd", "Work", "Yes")
-        val mapNotes = hashMapOf<String, String>(
-                "1" to "2",
-                "Work" to "Yes",
-                "3" to "4"
-        )
-
-
-        db.collection("ListNotes")
-                .add(mapNotes)
-                .addOnSuccessListener {
-                    Log.i(TAG, "DocumentSnapshot added with ID: ${it.id}")
-                }
-                .addOnFailureListener {
-                    Log.w(TAG, "Error adding document")
-                }
+        myDB.setValue(list)
 
 
         recyclerView.layoutManager = linearLayoutManager

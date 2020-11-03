@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         val mapNotes = hashMapOf<String, String>(
                 "1" to "2",
                 "Work" to "Yes",
+                "Work" to "Yes",
+                "Work" to "Yes",
                 "3" to "4"
         )
 

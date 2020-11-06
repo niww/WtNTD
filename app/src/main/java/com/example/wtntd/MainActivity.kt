@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.whntd.data.NoteItemAdapter
 import com.example.wtntd.data.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -27,9 +28,13 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        val list = mutableListOf("12", "sdsd", "Work", "Yes")
+        val list = mutableListOf("12", "sdsd", "Work", "Yes", "Test", "test")
+
+        val auth = FirebaseAuth.getInstance()
 
         database = Firebase.database.reference
+        auth.currentUser.let { it?.uid }
+            ?.let { database.child("users").child(it).child("NotesList").setValue(list) }
 
 
         recyclerView.layoutManager = linearLayoutManager
@@ -37,8 +42,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 }
-private fun addNewUser(usedID:String, name:String, email:String?, databaseReference: DatabaseReference){
-    val user = User(name,email)
+
+private fun addNewUser(
+    usedID: String,
+    name: String,
+    email: String?,
+    databaseReference: DatabaseReference
+) {
+    val user = User(name, email)
     databaseReference.child("users").setValue(user)
 
 }

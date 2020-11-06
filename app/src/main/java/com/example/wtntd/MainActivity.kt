@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
     }
 
 
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 database.child("users").child(it).child(user.toString()).child("NotesList")
                     .setValue(list)
             }
+
     }
 
 }

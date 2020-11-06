@@ -1,6 +1,7 @@
 package com.example.wtntd.data
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whntd.data.NoteItemViewHolder
@@ -21,6 +22,7 @@ class NoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<N
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listNotes[position]
+        holder.textNoteItem.setOnLongClickListener { view -> listNotes.remove(listNotes[holder.adapterPosition]) }
     }
 
 

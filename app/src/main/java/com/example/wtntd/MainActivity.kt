@@ -2,22 +2,21 @@ package com.example.wtntd
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.whntd.data.NoteItemAdapter
-import com.example.wtntd.data.User
+import com.example.wtntd.data.NoteItemAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: NoteItemAdapter
     private lateinit var database: DatabaseReference
+    private val auth = FirebaseAuth.getInstance()
+    private val list = mutableListOf("12", "sdsd", "Work", "Yes", "Test", "test")
+    private val user = auth.currentUser?.displayName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,28 +27,37 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        val list = mutableListOf("12", "sdsd", "Work", "Yes", "Test", "test")
 
-        val auth = FirebaseAuth.getInstance()
 
         database = Firebase.database.reference
         auth.currentUser.let { it?.uid }
-            ?.let { database.child("users").child(it).child("NotesList").setValue(list) }
+            ?.let {
+                database.child("users").child(it).child(user.toString()).child("NotesList")
+                    .setValue(list)
+            }
+
+        val button = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
 
         recyclerView.layoutManager = linearLayoutManager
         adapter = NoteItemAdapter(list)
         recyclerView.adapter = adapter
+        button.setOnClickListener {
+            list.add("Work")
+            (recyclerView.adapter as NoteItemAdapter).notifyDataSetChanged()
+
+        }
     }
+
+
+    override fun onPause() {
+        super.onPause()
+        auth.currentUser.let { it?.uid }
+            ?.let {
+                database.child("users").child(it).child(user.toString()).child("NotesList")
+                    .setValue(list)
+            }
+    }
+
 }
 
-private fun addNewUser(
-    usedID: String,
-    name: String,
-    email: String?,
-    databaseReference: DatabaseReference
-) {
-    val user = User(name, email)
-    databaseReference.child("users").setValue(user)
-
-}

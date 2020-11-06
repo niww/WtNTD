@@ -1,9 +1,9 @@
-package com.example.whntd.data
+package com.example.wtntd.data
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.whntd.data.NoteItemViewHolder
 import com.example.wtntd.R
 
 class NoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<NoteItemViewHolder>() {

@@ -15,7 +15,6 @@ class NoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<N
     }
 
     override fun getItemCount(): Int {
-//        return list.size
         return listNotes.size
     }
 

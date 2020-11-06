@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: NoteItemAdapter
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
 
         database = Firebase.database.reference
-        auth.currentUser.let { it?.uid }
+        auth.currentUser.let { it?.uid } //fixme rewrite data
             ?.let {
                 database.child("users").child(it).child(user.toString()).child("NotesList")
                     .setValue(list)
@@ -41,12 +42,14 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = linearLayoutManager
         adapter = NoteItemAdapter(list)
+
         recyclerView.adapter = adapter
         button.setOnClickListener {
-            list.add("Work")
+            list.add("Work " + Calendar.getInstance().time)
             (recyclerView.adapter as NoteItemAdapter).notifyDataSetChanged()
 
         }
+
     }
 
 

@@ -17,15 +17,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val TAG = "TAGG"
         val database = Firebase.database
         val myDB = database.getReference("ListNotes")
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         val list = mutableListOf("12", "sdsd", "Work", "Yes")
-        myDB.setValue(list)
 
+        myDB.setValue(list)
 
         recyclerView.layoutManager = linearLayoutManager
         adapter = NoteItemAdapter(list)

@@ -26,10 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: NoteItemAdapter
     private lateinit var database: DatabaseReference
     private val auth = FirebaseAuth.getInstance()
-//    private val list = mutableListOf("12", "sdsd", "Work", "Yes", "Test", "test")
     private val list = mutableListOf("")
 
-    //    private val list = mutableListOf<String>()
     private val user = auth.currentUser?.displayName
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,13 +68,6 @@ class MainActivity : AppCompatActivity() {
 
         database.addValueEventListener(postListener)
 
-//        auth.currentUser.let { it?.uid } //fixme rewrite data
-//            ?.let {
-//                database.child("users").child(it).child(user.toString()).child("NotesList")
-//                    .setValue(list)
-//            }
-
-
         val button = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
         recyclerView.layoutManager = linearLayoutManager
@@ -98,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter?.notifyDataSetChanged()
 
         }
-
 
     }
 

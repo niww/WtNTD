@@ -7,6 +7,6 @@ package com.example.wtntd.data
 //data class User(var UserName: String,var Email: String)
 //data class User(var UserName: String,var Email: String)
 data class User(
-    var UserName: String? = "",
-    var Email: String? = ""
+    var userName: String?
+//    var listNotes: MutableList<String>
 )

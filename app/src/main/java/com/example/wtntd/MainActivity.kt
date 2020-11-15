@@ -70,10 +70,11 @@ class MainActivity : AppCompatActivity() {
 
         val button = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
-        recyclerView.layoutManager = linearLayoutManager
-        adapter = NoteItemAdapter(list)
+        recyclerView.apply {
+            layoutManager = linearLayoutManager
+            adapter = NoteItemAdapter(list)
+        }
 
-        recyclerView.adapter = adapter
         button.setOnClickListener {
 
             val editText = EditText(this)

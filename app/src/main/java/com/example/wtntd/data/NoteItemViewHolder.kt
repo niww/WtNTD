@@ -10,5 +10,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 open class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
+    val childrv = itemView.findViewById<RecyclerView>(R.id.child_rv)
 
 }

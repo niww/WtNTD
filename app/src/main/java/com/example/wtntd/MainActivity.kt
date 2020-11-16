@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setActionBar(findViewById(R.id.appbar))
+        setSupportActionBar(findViewById(R.id.toolbar))
         val TAG = "TAGG"
         val USER = "userss"
 

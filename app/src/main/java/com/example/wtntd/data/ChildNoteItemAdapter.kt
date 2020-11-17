@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whntd.data.NoteItemViewHolder
 import com.example.wtntd.R
+import kotlin.random.Random
 
 class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<ChildNoteItemViewHolder>() {
 
@@ -16,6 +17,8 @@ class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adap
 
     override fun getItemCount(): Int {
         return listNotes.size
+//        return Random.nextInt() //fixme
+//        return 1
     }
 
     override fun onBindViewHolder(holder: ChildNoteItemViewHolder, position: Int) {

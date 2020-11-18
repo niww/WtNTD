@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private val auth = FirebaseAuth.getInstance()
     private val list = mutableListOf("")
-    private val nestedList = mutableListOf("")
 
     private val user = auth.currentUser?.displayName
 
@@ -75,8 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = NoteItemAdapter(list,this@MainActivity,nestedList)
-//            adapter = NoteItemAdapter(list,applicationContext)
+            adapter = NoteItemAdapter(list, this@MainActivity)
         }
 
         button.setOnClickListener {

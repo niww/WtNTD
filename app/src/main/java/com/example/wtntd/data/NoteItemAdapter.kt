@@ -14,7 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context, val listNestedNotes:MutableList<String>) :
+class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) :
     RecyclerView.Adapter<NoteItemViewHolder>() {
 
     val viewPool = RecyclerView.RecycledViewPool()

@@ -1,5 +1,6 @@
 package com.example.wtntd.data
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,12 +11,13 @@ import com.example.whntd.data.NoteItemViewHolder
 import com.example.wtntd.MainActivity
 import com.example.wtntd.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-class NoteItemAdapter(val listNotes: MutableList<String>) :
+class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context, val listNestedNotes:MutableList<String>) :
     RecyclerView.Adapter<NoteItemViewHolder>() {
 
     val viewPool = RecyclerView.RecycledViewPool()
-    val nestedList = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
 
@@ -30,10 +32,26 @@ class NoteItemAdapter(val listNotes: MutableList<String>) :
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
+        val nestedList = mutableListOf<String>()
 
         nestedList.add(listNotes[position])
         holder.textNoteItem.text = listNotes[position]
-        holder.textNoteItem.setOnLongClickListener { view -> listNotes.remove(listNotes[holder.adapterPosition]) }
+        holder.textNoteItem.setOnLongClickListener {
+
+            val editText = EditText(context)
+            MaterialAlertDialogBuilder(context)
+                .setTitle("Nested ToDo")
+                .setView(editText)
+                .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
+                .setPositiveButton(
+                    "Ok"
+                ) { dialogInterface, i -> nestedList.add(editText.text.toString()) }
+                .show()
+
+
+            return@setOnLongClickListener true
+         }
+
         //child rv
         val childLayoutManager =
             LinearLayoutManager(holder.childrv.context, LinearLayoutManager.VERTICAL, false)
@@ -45,6 +63,5 @@ class NoteItemAdapter(val listNotes: MutableList<String>) :
 
 
     }
-
 
 }

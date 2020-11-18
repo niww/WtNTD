@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 val u = snapshot.child("users").child(auth.currentUser?.uid.toString())
                     .child(user.toString()).child("NotesList")
                 list.clear()
+//                Log.d(USER,u.getValue())
+//                Log.d(USER,u.)
                 if (u.value != null) {
                     list.addAll(u.value as Collection<String>)
                 }
@@ -70,10 +72,11 @@ class MainActivity : AppCompatActivity() {
 
         val button = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
-        recyclerView.layoutManager = linearLayoutManager
-        adapter = NoteItemAdapter(list)
+        recyclerView.apply {
+            layoutManager = linearLayoutManager
+            adapter = NoteItemAdapter(list, this@MainActivity)
+        }
 
-        recyclerView.adapter = adapter
         button.setOnClickListener {
 
             val editText = EditText(this)

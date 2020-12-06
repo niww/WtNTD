@@ -2,5 +2,6 @@
     <string name="app_name">WtNTD</string>
     <string name="search">search</string>
     <string name="content_description">Content description</string>
-    <string name="menu_more">More menu</string>
+    <string name="menu">More menu</string>
+
 </resources>

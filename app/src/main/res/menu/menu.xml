@@ -6,8 +6,16 @@
         android:title="@string/search"
         android:contentDescription="@string/content_description"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/memu_more"
-        android:title="@string/menu_more"
+    <item android:id="@+id/menu_more"
+        android:title="@string/menu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        app:showAsAction="never"/>
+    <item android:id="@+id/menu_more1"
+        android:title="@string/menu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        app:showAsAction="never"/>
+    <item android:id="@+id/menu_more2"
+        android:title="@string/menu"
         android:icon="@drawable/ic_baseline_more_vert_24"
         app:showAsAction="never"/>
 

@@ -1,4 +1,4 @@
-package com.example.wtntd.ui
+package com.example.wtntd.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class ChildNoteItemAdapter(val listNotes: List<String>) :
-    RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
+class ChildTaskToDoItemAdapter(val listNotes: List<String>) :
+    RecyclerView.Adapter<ChildTaskToDoItemAdapter.ChildNoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {

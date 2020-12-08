@@ -1,20 +1,15 @@
-package com.example.wtntd
+package com.example.wtntd.ui
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wtntd.data.NoteItemAdapter
-import com.example.wtntd.data.User
-import com.google.android.material.appbar.AppBarLayout
+import com.example.wtntd.R
+import com.example.wtntd.data.Repository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -76,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = NoteItemAdapter(list, this@MainActivity)
+            adapter = NoteItemAdapter(Repository.list, this@MainActivity)
         }
 
         floatingActionButton.setOnClickListener {

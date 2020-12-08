@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.data.NoteItemAdapter
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
+//        setSupportActionBar(findViewById(R.id.toolbar))
         val TAG = "TAGG"
         val USER = "userss"
 
@@ -72,14 +74,12 @@ class MainActivity : AppCompatActivity() {
 
         database.addValueEventListener(postListener)
 
-        val button = findViewById<FloatingActionButton>(R.id.floatingActionButton)
-
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = NoteItemAdapter(list, this@MainActivity)
         }
 
-        button.setOnClickListener {
+        floatingActionButton.setOnClickListener {
 
             val editText = EditText(this)
             MaterialAlertDialogBuilder(this)
@@ -94,6 +94,29 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter?.notifyDataSetChanged()
 
         }
+        bottom_app_bar.setNavigationOnClickListener {
+            //todo
+            Toast.makeText(this, "Navigation", Toast.LENGTH_SHORT).show()
+
+        }
+        bottom_app_bar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_more -> {
+                    Toast.makeText(this, "One", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.menu_more1 -> {
+                    Toast.makeText(this, "Two", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.menu_more2 -> {
+                    Toast.makeText(this, "Three", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
 
     }
 

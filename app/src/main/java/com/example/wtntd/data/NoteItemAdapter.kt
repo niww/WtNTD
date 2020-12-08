@@ -1,21 +1,18 @@
 package com.example.wtntd.data
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.whntd.data.NoteItemViewHolder
-import com.example.wtntd.MainActivity
 import com.example.wtntd.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) :
-    RecyclerView.Adapter<NoteItemViewHolder>() {
+    RecyclerView.Adapter<NoteItemAdapter.NoteItemViewHolder>() {
 
     val viewPool = RecyclerView.RecycledViewPool()
 
@@ -60,8 +57,11 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
             adapter = ChildNoteItemAdapter(nestedList)
             setRecycledViewPool(viewPool)//fixme why we use that
         }
+    }
+    inner class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
+        val childrv = itemView.findViewById<RecyclerView>(R.id.child_rv)
 
     }
-
 }

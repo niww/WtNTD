@@ -1,13 +1,13 @@
 package com.example.wtntd.data
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.whntd.data.NoteItemViewHolder
 import com.example.wtntd.R
-import kotlin.random.Random
 
-class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<ChildNoteItemViewHolder>() {
+class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
@@ -26,5 +26,10 @@ class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adap
         holder.childtextNoteItem.text = listNotes[position]
     }
 
+    inner class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val childtextNoteItem = itemView.findViewById<TextView>(R.id.childTextNote)
+
+    }
 
 }

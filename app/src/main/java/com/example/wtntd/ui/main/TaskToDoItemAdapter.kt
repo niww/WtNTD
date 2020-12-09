@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.data.TaskToDo
 
-class TaskToDoItemAdapter() :
+class TaskToDoItemAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<TaskToDoItemAdapter.NoteItemViewHolder>() {
 
     var listTaskToDo: List<TaskToDo> = listOf()
@@ -17,6 +17,10 @@ class TaskToDoItemAdapter() :
             field = value
             notifyDataSetChanged()
         }
+
+    interface OnItemClickListener {
+        fun onItemClick(task: TaskToDo)
+    }
 
     val viewPool = RecyclerView.RecycledViewPool()
 
@@ -35,6 +39,8 @@ class TaskToDoItemAdapter() :
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listTaskToDo[position].task
+        onItemClickListener.onItemClick(listTaskToDo[position])
+
 
         val childLayoutManager =
             LinearLayoutManager(holder.childrv.context, LinearLayoutManager.VERTICAL, false)

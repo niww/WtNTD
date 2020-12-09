@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.data.Repository
+import com.example.wtntd.data.TaskToDo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.internal.bind.TimeTypeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
     private lateinit var adapterToDo: TaskToDoItemAdapter
     lateinit var viewModel: MainViewModel
 
@@ -25,7 +27,24 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        adapterToDo = TaskToDoItemAdapter()
+        adapterToDo = TaskToDoItemAdapter(object : TaskToDoItemAdapter.OnItemClickListener {
+            override fun onItemClick(task: TaskToDo) {
+
+                val editText = EditText(this@MainActivity)
+                MaterialAlertDialogBuilder(this@MainActivity)
+
+                    .setTitle("New Nested Task")
+                    .setView(editText)
+                    .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
+                    .setPositiveButton(
+                        "Ok"
+                    ) { dialogInterface, i ->  } // todo
+                    .show()
+
+//                recyclerView.adapter?.notifyDataSetChanged()
+            }
+
+        })
         adapterToDo.listTaskToDo = Repository.getListTaskToDo()
 
         recyclerView.apply {
@@ -36,6 +55,20 @@ class MainActivity : AppCompatActivity() {
         viewModel.viewState().observe(this, Observer<MainViewState> {
             it?.let { adapterToDo.listTaskToDo = it.listTaskToDo }
         })
+
+        fun addNestedTask(){
+            val editText = EditText(applicationContext)
+            MaterialAlertDialogBuilder(applicationContext)
+                .setTitle("New Nested Task")
+                .setView(editText)
+                .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
+                .setPositiveButton(
+                    "Ok"
+                ) { dialogInterface, i ->  } // todo
+                .show()
+
+            recyclerView.adapter?.notifyDataSetChanged()
+        }
 
         floatingActionButton.setOnClickListener {
 
@@ -76,6 +109,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
 
 }
 

@@ -27,6 +27,8 @@ class TaskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
+        setSupportActionBar(task_appbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         task = intent.getParcelableExtra(EXTRA_TASK)
 
         initView()

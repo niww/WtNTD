@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +8,30 @@
     <com.google.android.material.bottomappbar.BottomAppBar
 
         android:id="@+id/task_appbar"
-        style="@style/Widget.MaterialComponents.BottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navigationIcon="@drawable/fui_ic_yahoo_24dp"
-        tools:ignore="BottomAppBar" />
+        android:layout_gravity="bottom"
+         />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/task_todo">
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/task_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/task_todo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/task_todo">
@@ -42,14 +47,16 @@
             android:text="+"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/rv_task_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ll" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,7 +16,6 @@ object Repository {
             Task(UUID.randomUUID().toString(),"5", listOf("555", "555", "555")),
             Task(UUID.randomUUID().toString(),"5", listOf("555", "555", "555")),
             Task(id = UUID.randomUUID().toString(), task = "5",listTask =  listOf("555", "555", "555"))
-
         )
     }
 

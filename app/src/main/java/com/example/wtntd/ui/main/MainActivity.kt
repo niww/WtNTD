@@ -15,7 +15,7 @@ import com.example.wtntd.ui.task.TaskActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity() : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
     private lateinit var adapterToDo: TaskToDoItemAdapter
     lateinit var viewModel: MainViewModel
 
@@ -30,9 +30,7 @@ class MainActivity() : AppCompatActivity() {
         adapterToDo = TaskToDoItemAdapter(object : TaskToDoItemAdapter.OnItemClickListener {
             override fun onItemClick(task: Task) {
                 openTaskScreen(task)
-
             }
-
         })
         adapterToDo.listTask = Repository.getListTaskToDo()
 
@@ -45,33 +43,7 @@ class MainActivity() : AppCompatActivity() {
             it?.let { adapterToDo.listTask = it.listTask }
         })
 
-        fun addNestedTask(){
-            val editText = EditText(applicationContext)
-            MaterialAlertDialogBuilder(applicationContext)
-                .setTitle("New Nested Task")
-                .setView(editText)
-                .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
-                .setPositiveButton(
-                    "Ok"
-                ) { dialogInterface, i ->  } // todo
-                .show()
-
-            recyclerView.adapter?.notifyDataSetChanged()
-        }
-
         floatingActionButton.setOnClickListener {
-
-            val editText = EditText(this)
-            MaterialAlertDialogBuilder(this)
-                .setTitle("New ToDo")
-                .setView(editText)
-                .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
-                .setPositiveButton(
-                    "Ok"
-                ) { dialogInterface, i ->  } // todo
-                .show()
-
-            recyclerView.adapter?.notifyDataSetChanged()
 
         }
         bottom_app_bar.setNavigationOnClickListener {
@@ -104,7 +76,6 @@ class MainActivity() : AppCompatActivity() {
     private fun openTaskScreen(task: Task?) {
         val intent = TaskActivity.getStartIntent(this,task)
         startActivity(intent)
-
     }
 
 }

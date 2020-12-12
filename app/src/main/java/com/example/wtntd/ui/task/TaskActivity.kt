@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wtntd.R
 import com.example.wtntd.data.Task
+import com.example.wtntd.ui.main.ChildTaskToDoItemAdapter
+import kotlinx.android.synthetic.main.activity_task.*
 
 class TaskActivity : AppCompatActivity() {
 
@@ -26,6 +29,18 @@ class TaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task)
         task = intent.getParcelableExtra(EXTRA_TASK)
 
+        initView()
+
+    }
+
+    private fun initView() {
+        if (task!= null){
+            task_todo.setText(task?.task ?: "")
+            rv_task_activity?.apply {
+                layoutManager = LinearLayoutManager(this@TaskActivity, LinearLayoutManager.VERTICAL, false)
+                adapter = ChildTaskToDoItemAdapter(task!!.listTask)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =

@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.data.Repository
-import com.example.wtntd.data.TaskToDo
+import com.example.wtntd.data.Task
+import com.example.wtntd.ui.task.TaskActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.internal.bind.TimeTypeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity() : AppCompatActivity() {
@@ -28,24 +28,13 @@ class MainActivity() : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         adapterToDo = TaskToDoItemAdapter(object : TaskToDoItemAdapter.OnItemClickListener {
-            override fun onItemClick(task: TaskToDo) {
+            override fun onItemClick(task: Task) {
+                openTaskScreen(task)
 
-                val editText = EditText(this@MainActivity)
-                MaterialAlertDialogBuilder(this@MainActivity)
-
-                    .setTitle("New Nested Task")
-                    .setView(editText)
-                    .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
-                    .setPositiveButton(
-                        "Ok"
-                    ) { dialogInterface, i ->  } // todo
-                    .show()
-
-//                recyclerView.adapter?.notifyDataSetChanged()
             }
 
         })
-        adapterToDo.listTaskToDo = Repository.getListTaskToDo()
+        adapterToDo.listTask = Repository.getListTaskToDo()
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
@@ -53,7 +42,7 @@ class MainActivity() : AppCompatActivity() {
         }
 
         viewModel.viewState().observe(this, Observer<MainViewState> {
-            it?.let { adapterToDo.listTaskToDo = it.listTaskToDo }
+            it?.let { adapterToDo.listTask = it.listTask }
         })
 
         fun addNestedTask(){
@@ -108,13 +97,15 @@ class MainActivity() : AppCompatActivity() {
             }
         }
 
+
+
     }
 
+    private fun openTaskScreen(task: Task?) {
+        val intent = TaskActivity.getStartIntent(this,task)
+        startActivity(intent)
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
-
 
 }
 

@@ -1,6 +1,6 @@
 package com.example.wtntd.ui.main
 
-import com.example.wtntd.data.TaskToDo
+import com.example.wtntd.data.Task
 
-class MainViewState(val listTaskToDo: List<TaskToDo>) {
+class MainViewState(val listTask: List<Task>) {
 }

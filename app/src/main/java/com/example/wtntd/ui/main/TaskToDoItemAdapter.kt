@@ -7,19 +7,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.data.TaskToDo
+import com.example.wtntd.data.Task
 
 class TaskToDoItemAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<TaskToDoItemAdapter.NoteItemViewHolder>() {
 
-    var listTaskToDo: List<TaskToDo> = listOf()
+    var listTask: List<Task> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     interface OnItemClickListener {
-        fun onItemClick(task: TaskToDo)
+        fun onItemClick(task: Task)
     }
 
     val viewPool = RecyclerView.RecycledViewPool()
@@ -33,21 +33,20 @@ class TaskToDoItemAdapter(private val onItemClickListener: OnItemClickListener) 
     }
 
     override fun getItemCount(): Int {
-        return listTaskToDo.size
+        return listTask.size
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
-        holder.textNoteItem.text = listTaskToDo[position].task
-        onItemClickListener.onItemClick(listTaskToDo[position])
-
+        holder.textNoteItem.text = listTask[position].task
+        holder.itemView.setOnClickListener { onItemClickListener.onItemClick(listTask[position]) }
 
         val childLayoutManager =
             LinearLayoutManager(holder.childrv.context, LinearLayoutManager.VERTICAL, false)
 
         holder.childrv.apply {
             layoutManager = childLayoutManager
-            adapter = ChildTaskToDoItemAdapter(listTaskToDo[position].listTask)
+            adapter = ChildTaskToDoItemAdapter(listTask[position].listTask)
             setRecycledViewPool(viewPool)//fixme why we use that
         }
     }

@@ -1,24 +1,26 @@
 package com.example.wtntd.data
 
+import java.util.*
+
 object Repository {
 
-    private val list: List<TaskToDo>
+    private val LIST: List<Task>
 
     init {
-        list = listOf(
-            TaskToDo("1", listOf("1111", "1111", "1111")),
-            TaskToDo("2", listOf("222", "222", "222")),
-            TaskToDo("3", listOf("333", "333", "333")),
-            TaskToDo("4", listOf("444", "444", "444")),
-            TaskToDo("5", listOf("555", "555", "555")),
-            TaskToDo("5", listOf("555", "555", "555")),
-            TaskToDo("5", listOf("555", "555", "555")),
-            TaskToDo("5", listOf("555", "555", "555"))
+        LIST = listOf(
+            Task(UUID.randomUUID().toString(),"1", listOf("1111", "1111", "1111")),
+            Task(UUID.randomUUID().toString(),"2", listOf("222", "222", "222")),
+            Task(UUID.randomUUID().toString(),"3", listOf("333", "333", "333")),
+            Task(UUID.randomUUID().toString(),"4", listOf("444", "444", "444")),
+            Task(UUID.randomUUID().toString(),"5", listOf("555", "555", "555")),
+            Task(UUID.randomUUID().toString(),"5", listOf("555", "555", "555")),
+            Task(UUID.randomUUID().toString(),"5", listOf("555", "555", "555")),
+            Task(id = UUID.randomUUID().toString(), task = "5",listTask =  listOf("555", "555", "555"))
 
         )
     }
 
-    fun getListTaskToDo():List<TaskToDo>{
-        return list
+    fun getListTaskToDo():List<Task>{
+        return LIST
     }
 }

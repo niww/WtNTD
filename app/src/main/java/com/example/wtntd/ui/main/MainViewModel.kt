@@ -10,7 +10,9 @@ class MainViewModel : ViewModel() {
     private val viewStateLiveData = MutableLiveData<MainViewState>()
 
     init {
-        viewStateLiveData.value = MainViewState(Repository.getListTaskToDo())
+        Repository.getListTasks().observeForever {
+            viewStateLiveData.value = viewStateLiveData.value?.copy(listTask = it!!) ?: MainViewState(it!!)
+        }
     }
 
     fun viewState(): LiveData<MainViewState> = viewStateLiveData

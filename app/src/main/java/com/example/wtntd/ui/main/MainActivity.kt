@@ -2,7 +2,6 @@ package com.example.wtntd.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +11,6 @@ import com.example.wtntd.R
 import com.example.wtntd.data.Repository
 import com.example.wtntd.data.Task
 import com.example.wtntd.ui.task.TaskActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        adapterToDo.listTask = Repository.getListTaskToDo()
+        adapterToDo.listTask = Repository.getListTasks().value!!
 
         recyclerView.apply {
             layoutManager = linearLayoutManager

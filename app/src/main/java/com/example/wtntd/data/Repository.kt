@@ -4,10 +4,10 @@ import java.util.*
 
 object Repository {
 
-    private val LIST: List<Task>
+    private val listTaskLiveData: List<Task>
 
     init {
-        LIST = listOf(
+        listTaskLiveData = listOf(
             Task(UUID.randomUUID().toString(),"1", listOf("1111", "1111", "1111")),
             Task(UUID.randomUUID().toString(),"2", listOf("222", "222", "222")),
             Task(UUID.randomUUID().toString(),"3", listOf("333", "333", "333")),
@@ -20,6 +20,8 @@ object Repository {
     }
 
     fun getListTaskToDo():List<Task>{
-        return LIST
+        return listTaskLiveData
     }
+
+
 }

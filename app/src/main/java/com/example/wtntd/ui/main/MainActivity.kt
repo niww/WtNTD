@@ -15,7 +15,7 @@ import com.example.wtntd.ui.task.TaskActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var adapterToDo: TaskToDoItemAdapter
     lateinit var viewModel: MainViewModel
 
@@ -32,6 +32,7 @@ class MainActivity: AppCompatActivity() {
                 openTaskScreen(task)
             }
         })
+
         adapterToDo.listTask = Repository.getListTaskToDo()
 
         recyclerView.apply {
@@ -70,11 +71,10 @@ class MainActivity: AppCompatActivity() {
         }
 
 
-
     }
 
     private fun openTaskScreen(task: Task?) {
-        val intent = TaskActivity.getStartIntent(this,task)
+        val intent = TaskActivity.getStartIntent(this, task)
         startActivity(intent)
     }
 

@@ -12,36 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wtntd.R
 import com.example.wtntd.data.Task
-import com.example.wtntd.ui.main.ChildTaskToDoItemAdapter
+import com.example.wtntd.ui.main.ChildTaskAdapter
 import kotlinx.android.synthetic.main.activity_task.*
+import kotlinx.android.synthetic.main.parent_recycler_view.*
+import java.util.*
 
 class TaskActivity : AppCompatActivity() {
-
-    private lateinit var viewModel: TaskViewModel
-
-    private val textChangeListener = object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
-
-        override fun afterTextChanged(p0: Editable?) {
-            saveTaskAfterChanged()
-        }
-    }
-
-    private fun saveTaskAfterChanged() {
-        if (task_todo.text == null || task_todo.text!!.length <3){
-            Handler().postDelayed(object : Runnable {
-                override fun run() {
-
-                    task = task?.copy(task = task_todo.text.toString())
-                    if (task!= null ) viewModel.saveChange(task)
-                }
-            }, 2000L)
-        }
-    }
 
     companion object {
         private val EXTRA_TASK = TaskActivity::class.java.name + "extra.TASK"
@@ -52,6 +28,26 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var viewModel: TaskViewModel
+
+    private val textChangeListener = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun afterTextChanged(p0: Editable?) {
+            saveTaskAfterChanged()
+        }
+    }
+
+    private fun saveTaskAfterChanged() {
+        if (task_todo.text == null || task_todo.text!!.length < 3) return
+        task = task?.copy(task = task_todo.text.toString()) ?: Task(
+            id = UUID.randomUUID().toString(),
+            task = task_todo.text.toString(),
+            listTask = listOf(task_todo.text.toString())
+        )
+        task?.let { viewModel.saveChange(it) } // todo task not save
+    }
+
     private var task: Task? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,9 +56,6 @@ class TaskActivity : AppCompatActivity() {
         setSupportActionBar(task_appbar)
 
         viewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
-
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         task = intent.getParcelableExtra(EXTRA_TASK)
 
@@ -71,16 +64,18 @@ class TaskActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        if (task!= null){
+        if (task != null) {
             task_todo.setText(task?.task ?: "")
             task_todo.addTextChangedListener(textChangeListener)
 
             rv_task_activity?.apply {
-                layoutManager = LinearLayoutManager(this@TaskActivity, LinearLayoutManager.VERTICAL, false)
-                adapter = ChildTaskToDoItemAdapter(task!!.listTask)
+                layoutManager =
+                    LinearLayoutManager(this@TaskActivity, LinearLayoutManager.VERTICAL, false)
+                adapter = ChildTaskAdapter(task?.listTask!!)
             }
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {

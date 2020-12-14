@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class ChildTaskToDoItemAdapter(val listNotes: List<String>) :
-    RecyclerView.Adapter<ChildTaskToDoItemAdapter.ChildNoteItemViewHolder>() {
+class ChildTaskAdapter(val listNotes: List<String>) :
+    RecyclerView.Adapter<ChildTaskAdapter.ChildNoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {

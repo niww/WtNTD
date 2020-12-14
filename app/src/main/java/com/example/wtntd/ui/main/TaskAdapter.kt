@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.data.Task
 
-class TaskToDoItemAdapter(private val onItemClickListener: OnItemClickListener) :
-    RecyclerView.Adapter<TaskToDoItemAdapter.NoteItemViewHolder>() {
+class TaskAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<TaskAdapter.NoteItemViewHolder>() {
 
     var listTask: List<Task> = listOf()
         set(value) {
@@ -46,7 +46,7 @@ class TaskToDoItemAdapter(private val onItemClickListener: OnItemClickListener) 
 
         holder.childrv.apply {
             layoutManager = childLayoutManager
-            adapter = ChildTaskToDoItemAdapter(listTask[position].listTask)
+            adapter = ChildTaskAdapter(listTask[position].listTask)
             setRecycledViewPool(viewPool)//fixme why we use that
         }
     }

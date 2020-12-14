@@ -14,7 +14,7 @@ import com.example.wtntd.ui.task.TaskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var adapterToDo: TaskToDoItemAdapter
+    private lateinit var adapterToDo: TaskAdapter
     lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        adapterToDo = TaskToDoItemAdapter(object : TaskToDoItemAdapter.OnItemClickListener {
+        adapterToDo = TaskAdapter(object : TaskAdapter.OnItemClickListener {
             override fun onItemClick(task: Task) {
                 openTaskScreen(task)
             }
@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         floatingActionButton.setOnClickListener {
 
+            openTaskScreen(null)
         }
         bottom_app_bar.setNavigationOnClickListener {
             //todo

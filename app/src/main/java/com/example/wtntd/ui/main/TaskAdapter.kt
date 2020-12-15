@@ -1,9 +1,14 @@
 package com.example.wtntd.ui.main
 
+import android.app.Activity
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
@@ -44,11 +49,28 @@ class TaskAdapter(private val onItemClickListener: OnItemClickListener) :
         val childLayoutManager =
             LinearLayoutManager(holder.childrv.context, LinearLayoutManager.VERTICAL, false)
 
+        val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Log.d("Swipe", "swipe")
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipe)
+
         holder.childrv.apply {
             layoutManager = childLayoutManager
             adapter = ChildTaskAdapter(listTask[position].listTask)
             setRecycledViewPool(viewPool)//fixme why we use that
+
         }
+        itemTouchHelper.attachToRecyclerView(holder.childrv)
     }
 
     inner class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

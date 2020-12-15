@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
 class ChildTaskAdapter(val listNotes: List<String>) :
-    RecyclerView.Adapter<ChildTaskAdapter.ChildNoteItemViewHolder>() {
+    RecyclerView.Adapter<ChildTaskAdapter.ChildNoteItemViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
@@ -32,5 +33,6 @@ class ChildTaskAdapter(val listNotes: List<String>) :
         val childtextNoteItem = itemView.findViewById<TextView>(R.id.childTextNote)
 
     }
+
 
 }

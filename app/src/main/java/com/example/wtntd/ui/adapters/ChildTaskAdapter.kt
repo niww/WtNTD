@@ -1,10 +1,9 @@
-package com.example.wtntd.ui.main
+package com.example.wtntd.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 

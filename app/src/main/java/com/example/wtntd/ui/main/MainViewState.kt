@@ -1,6 +1,7 @@
 package com.example.wtntd.ui.main
 
 import com.example.wtntd.data.Task
+import com.example.wtntd.ui.base.BaseViewState
 
-data class MainViewState(val listTask: List<Task>) {
-}
+class MainViewState(val listTask: List<Task>? = null, val er: Throwable? = null) :
+    BaseViewState<List<Task>?>(listTask, er)

@@ -3,21 +3,20 @@ package com.example.wtntd.ui.task
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wtntd.R
 import com.example.wtntd.data.Task
-import com.example.wtntd.ui.main.ChildTaskAdapter
+import com.example.wtntd.ui.base.BaseActivity
+import com.example.wtntd.ui.adapters.ChildTaskAdapter
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.parent_recycler_view.*
 import java.util.*
 
-class TaskActivity : AppCompatActivity() {
+class TaskActivity : BaseActivity<Task?, TaskViewState>() {
 
     companion object {
         private val EXTRA_TASK = TaskActivity::class.java.name + "extra.TASK"
@@ -28,8 +27,12 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModel: TaskViewModel
-
+    override val layoutRes: Int =  R.layout.activity_task
+    private var task: Task? = null
+    override val viewModel: TaskViewModel by lazy {
+        ViewModelProvider(this
+        ).get(TaskViewModel::class.java)
+    }
     private val textChangeListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -48,14 +51,11 @@ class TaskActivity : AppCompatActivity() {
         task?.let { viewModel.saveChange(it) } // todo task not save
     }
 
-    private var task: Task? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
         setSupportActionBar(task_appbar)
 
-        viewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         task = intent.getParcelableExtra(EXTRA_TASK)
 
@@ -84,4 +84,9 @@ class TaskActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+
+    override fun renderData(date: Task?) {
+        this.task =date
+        initView()
+    }
 }

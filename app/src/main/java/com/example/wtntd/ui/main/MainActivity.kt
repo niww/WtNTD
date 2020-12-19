@@ -1,21 +1,24 @@
 package com.example.wtntd.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.data.Repository
 import com.example.wtntd.data.Task
+import com.example.wtntd.ui.adapters.TaskAdapter
+import com.example.wtntd.ui.base.BaseActivity
+import com.example.wtntd.ui.base.BaseViewModel
 import com.example.wtntd.ui.task.TaskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
     private lateinit var adapterToDo: TaskAdapter
-    lateinit var viewModel: MainViewModel
+    override val viewModel: BaseViewModel<List<Task>?, MainViewState> by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+    override val layoutRes: Int= R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,23 +27,17 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         adapterToDo = TaskAdapter(object : TaskAdapter.OnItemClickListener {
             override fun onItemClick(task: Task) {
                 openTaskScreen(task)
             }
         })
 
-        adapterToDo.listTask = Repository.getListTasks().value!!
-
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = adapterToDo
         }
 
-        viewModel.viewState().observe(this, Observer<MainViewState> {
-            it?.let { adapterToDo.listTask = it.listTask }
-        })
 
         floatingActionButton.setOnClickListener {
 
@@ -75,6 +72,11 @@ class MainActivity : AppCompatActivity() {
     private fun openTaskScreen(task: Task?) {
         val intent = TaskActivity.getStartIntent(this, task)
         startActivity(intent)
+    }
+
+    override fun renderData(date: List<Task>?) {
+        if(date == null) return
+        adapterToDo.listTask = date
     }
 
 }

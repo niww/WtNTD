@@ -2,6 +2,7 @@ package com.example.wtntd.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
     private lateinit var adapterToDo: TaskAdapter
-    override val viewModel: BaseViewModel<List<Task>?, MainViewState> by lazy {
+    override val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
     override val layoutRes: Int= R.layout.activity_main
@@ -27,11 +28,16 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
+        viewModel.viewState().observe(this, Observer {
+            it?.let { adapterToDo.listTask = it.listTask!! }
+        })
+
         adapterToDo = TaskAdapter(object : TaskAdapter.OnItemClickListener {
             override fun onItemClick(task: Task) {
                 openTaskScreen(task)
             }
         })
+
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
@@ -39,10 +45,11 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
         }
 
 
-        floatingActionButton.setOnClickListener {
 
+        floatingActionButton.setOnClickListener {
             openTaskScreen(null)
         }
+
         bottom_app_bar.setNavigationOnClickListener {
             //todo
             Toast.makeText(this, "Navigation", Toast.LENGTH_SHORT).show()

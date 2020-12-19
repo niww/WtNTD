@@ -10,7 +10,6 @@ import com.example.wtntd.R
 class ChildTaskAdapter(val listNotes: List<String>) :
     RecyclerView.Adapter<ChildTaskAdapter.ChildNoteItemViewHolder>(){
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
 
         return ChildNoteItemViewHolder(

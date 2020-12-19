@@ -13,7 +13,8 @@ import java.lang.Exception
 
 class FireStoreProvider : RemoteDataProvider {
 
-    private val TAG = "${FireStoreProvider::class.java.simpleName} :"
+//    private val TAG = "${FireStoreProvider::class.java.simpleName} :"
+    private val TAG = "SaveTask"
 
     private val db = FirebaseFirestore.getInstance()
     private val taskReference = db.collection("Tasks")

@@ -12,6 +12,7 @@ object Repository {
     fun getTasks() = remoteDataProvider.subscriptToAllTasks()
     fun saveTask(task: Task) = remoteDataProvider.saveTask(task)
     fun getTaskById(id: String) = remoteDataProvider.getTaskById(id)
+    fun getCurrentUser() = remoteDataProvider.getCurrentUser()
 
 
 }

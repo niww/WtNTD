@@ -1,4 +1,4 @@
-package com.example.wtntd.ui
+package com.example.wtntd.ui.splash
 
 import android.app.Activity
 import android.content.Intent

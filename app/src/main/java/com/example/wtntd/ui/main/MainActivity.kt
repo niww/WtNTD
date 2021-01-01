@@ -1,7 +1,10 @@
 package com.example.wtntd.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +18,11 @@ import com.example.wtntd.ui.task.TaskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
+
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context,MainActivity::class.java)
+    }
+
     private lateinit var adapterToDo: TaskAdapter
     override val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
@@ -24,6 +32,9 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.tool_bar))
+
+
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
@@ -38,24 +49,21 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
             }
         })
 
-
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = adapterToDo
         }
 
-
-
         floatingActionButton.setOnClickListener {
             openTaskScreen(null)
         }
 
-        bottom_app_bar.setNavigationOnClickListener {
+        tool_bar.setNavigationOnClickListener {
             //todo
             Toast.makeText(this, "Navigation", Toast.LENGTH_SHORT).show()
-
         }
-        bottom_app_bar.setOnMenuItemClickListener {
+
+        tool_bar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_more -> {
                     Toast.makeText(this, "One", Toast.LENGTH_SHORT).show()
@@ -72,8 +80,6 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
                 else -> false
             }
         }
-
-
     }
 
     private fun openTaskScreen(task: Task?) {

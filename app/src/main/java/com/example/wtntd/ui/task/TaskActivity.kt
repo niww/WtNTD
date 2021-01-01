@@ -29,10 +29,12 @@ class TaskActivity : BaseActivity<Task?, TaskViewState>() {
 
     override val layoutRes: Int =  R.layout.activity_task
     private var task: Task? = null
+
     override val viewModel: TaskViewModel by lazy {
         ViewModelProvider(this
         ).get(TaskViewModel::class.java)
     }
+
     private val textChangeListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -86,7 +88,7 @@ class TaskActivity : BaseActivity<Task?, TaskViewState>() {
         }
 
     override fun renderData(date: Task?) {
-        this.task =date
+        this.task = date
         initView()
     }
 }

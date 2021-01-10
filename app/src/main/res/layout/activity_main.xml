@@ -15,7 +15,7 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu"
+            app:menu="@menu/tool_bar"
             app:navigationIcon="@drawable/ic_baseline_menu_24" />
     </com.google.android.material.appbar.AppBarLayout>
 

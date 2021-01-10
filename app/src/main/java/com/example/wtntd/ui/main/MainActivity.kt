@@ -3,6 +3,7 @@ package com.example.wtntd.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.Observer
@@ -35,9 +36,8 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
         setSupportActionBar(findViewById(R.id.tool_bar))
 
 
-
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         viewModel.viewState().observe(this, Observer {
             it?.let { adapterToDo.listTask = it.listTask!! }
@@ -90,6 +90,13 @@ class MainActivity : BaseActivity<List<Task>?, MainViewState>() {
     override fun renderData(date: List<Task>?) {
         if(date == null) return
         adapterToDo.listTask = date
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.tool_bar,menu)
+        return true
     }
 
 }

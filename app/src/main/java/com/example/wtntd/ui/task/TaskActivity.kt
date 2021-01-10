@@ -27,11 +27,12 @@ class TaskActivity : BaseActivity<Task?, TaskViewState>() {
         }
     }
 
-    override val layoutRes: Int =  R.layout.activity_task
+    override val layoutRes: Int = R.layout.activity_task
     private var task: Task? = null
 
     override val viewModel: TaskViewModel by lazy {
-        ViewModelProvider(this
+        ViewModelProvider(
+            this
         ).get(TaskViewModel::class.java)
     }
 
@@ -56,10 +57,14 @@ class TaskActivity : BaseActivity<Task?, TaskViewState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
-        setSupportActionBar(task_appbar)
+        task = intent.getParcelableExtra(EXTRA_TASK)
+
+        setSupportActionBar(task_toolbar)
+        if (task != null) {
+            supportActionBar?.title = task!!.task
+        }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        task = intent.getParcelableExtra(EXTRA_TASK)
 
         initView()
 

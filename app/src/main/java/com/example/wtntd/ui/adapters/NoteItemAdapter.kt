@@ -1,4 +1,4 @@
-package com.example.wtntd.data
+package com.example.wtntd.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -47,7 +47,7 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
 
 
             return@setOnLongClickListener true
-         }
+        }
 
         //child rv
         val childLayoutManager =
@@ -58,7 +58,8 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
             setRecycledViewPool(viewPool)//fixme why we use that
         }
     }
-    inner class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
         val childrv = itemView.findViewById<RecyclerView>(R.id.child_rv)

@@ -1,4 +1,4 @@
-package com.example.wtntd.data
+package com.example.wtntd.model.data
 
 //open class User(val UserName: String,val Email: String)
 //open class User(UserName: String, Email:String)

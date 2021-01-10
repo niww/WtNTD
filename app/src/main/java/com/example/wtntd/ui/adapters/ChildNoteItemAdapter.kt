@@ -1,4 +1,4 @@
-package com.example.wtntd.data
+package com.example.wtntd.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
+class ChildNoteItemAdapter(val listNotes: MutableList<String>) :
+    RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
 
-        return ChildNoteItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.child_recycler_view,parent,false))
+        return ChildNoteItemViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.child_recycler_view, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {

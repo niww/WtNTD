@@ -11,12 +11,9 @@ class ChildNoteItemAdapter(val listNotes: MutableList<String>) :
     RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
-
-        return ChildNoteItemViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= ChildNoteItemViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.child_recycler_view, parent, false)
         )
-    }
 
     override fun getItemCount(): Int {
         return listNotes.size
@@ -29,7 +26,7 @@ class ChildNoteItemAdapter(val listNotes: MutableList<String>) :
         holder.childtextNoteItem.text = listNotes[position]
     }
 
-    inner class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val childtextNoteItem = itemView.findViewById<TextView>(R.id.childTextNote)
 

@@ -16,13 +16,12 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
 
     val viewPool = RecyclerView.RecycledViewPool()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
-
-        return NoteItemViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        NoteItemViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.parent_recycler_view, parent, false)
         )
-    }
+
 
     override fun getItemCount(): Int {
         return listNotes.size
@@ -44,7 +43,6 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
                     "Ok"
                 ) { dialogInterface, i -> nestedList.add(editText.text.toString()) }
                 .show()
-
 
             return@setOnLongClickListener true
         }

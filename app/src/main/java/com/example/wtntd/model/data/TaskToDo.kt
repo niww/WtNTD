@@ -1,3 +1,5 @@
 package com.example.wtntd.model.data
 
-data class TaskToDo(val task: String, val listTask: MutableList<String>)
+data class TaskToDo(
+    val uid: String,
+    val task: String)

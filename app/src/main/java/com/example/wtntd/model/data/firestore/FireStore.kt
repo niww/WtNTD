@@ -46,7 +46,7 @@ class FireStore {
 
     fun saveData(name: String, id: Int) {
 
-        db.collection("users").document("$id").set(TaskToDo(name, mutableListOf(name)))
+//        db.collection("users").document("$id").set(TaskToDo(name, mutableListOf(name)))
 
 
 //        db.collection("users").document(name).set(listOf(name))

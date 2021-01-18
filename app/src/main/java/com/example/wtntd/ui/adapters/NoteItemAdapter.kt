@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
+import com.example.wtntd.model.data.TaskToDo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) :
@@ -32,6 +33,7 @@ class NoteItemAdapter(val listNotes: MutableList<String>, val context: Context) 
 
         nestedList.add(listNotes[position])
         holder.textNoteItem.text = listNotes[position]
+
         holder.textNoteItem.setOnLongClickListener {
 
             val editText = EditText(context)

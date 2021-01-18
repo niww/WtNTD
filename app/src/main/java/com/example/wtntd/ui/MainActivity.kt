@@ -31,6 +31,14 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
+        val adapterNote = NoteItemAdapter(database.getData(), this@MainActivity)
+
+        recyclerView.apply {
+            layoutManager = linearLayoutManager
+            adapter = adapterNote
+        }
+        adapterNote.notifyDataSetChanged()
+
 
         val swipe = object : ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT) {
             override fun onMove(
@@ -44,36 +52,51 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 if (direction == ItemTouchHelper.LEFT){
 
+                    createSubToDo(viewHolder.adapterPosition)
+                    recyclerView.adapter?.notifyDataSetChanged()
+
                     Timber.d(" Swipe adapterPosition ${viewHolder.adapterPosition  }")
                     Timber.d(" Swipe layoutPosition${viewHolder.layoutPosition }")
+                    Timber.d("  database.getData().size${database.getData().size }")
                 }
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(swipe)
-
-        recyclerView.apply {
-            layoutManager = linearLayoutManager
-            adapter = NoteItemAdapter(database.getData(), this@MainActivity)
-        }
-
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        floatingActionButton.setOnClickListener {
-
-            val editText = EditText(this)
-            MaterialAlertDialogBuilder(this)
-                .setTitle("New ToDo")
-                .setView(editText)
-                .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
-                .setPositiveButton(
-                    "Ok"
-                ) { dialogInterface, i -> database.saveData(editText.text.toString()) }
-                .show()
-
+        floatingActionButton.setOnClickListener {view->
+            createNewToDo()
+            Timber.d(" Swipe layoutPosition${database.getData().size}")
             recyclerView.adapter?.notifyDataSetChanged()
 
         }
+
+    }
+
+
+    fun createNewToDo(){
+        val editText = EditText(this)
+        MaterialAlertDialogBuilder(this)
+            .setTitle("New ToDo")
+            .setView(editText)
+            .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
+            .setPositiveButton(
+                "Ok"
+            ) { dialogInterface, i -> database.saveData(editText.text.toString(), database.getData().size +1) }
+            .show()
+    }
+
+    fun createSubToDo(id:Int){
+        val editText = EditText(this)
+        MaterialAlertDialogBuilder(this)
+            .setTitle("New SudToDo")
+            .setView(editText)
+            .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
+            .setPositiveButton(
+                "Ok"
+            ) { dialogInterface, i -> database.changeTaskList(editText.text.toString(), id) }
+            .show()
     }
 
 }

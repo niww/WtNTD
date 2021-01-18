@@ -18,11 +18,13 @@ class FireStore {
     private val auth = FirebaseAuth.getInstance()
 
     private val user = auth.currentUser?.displayName
+    private val data = mutableListOf<String>()
+
 
     fun getUserName() = user
 
+
     fun getData(): MutableList<String> {
-        val data = mutableListOf<String>()
 
         db.collection("users").addSnapshotListener { value, error ->
             value?.let {
@@ -42,12 +44,33 @@ class FireStore {
         return data
     }
 
-    fun saveData(todo: String) {
+    fun saveData(name: String, id: Int) {
 
-        db.collection("users").add(TaskToDo(todo, listOf(todo)))
+        db.collection("users").document("$id").set(TaskToDo(name, mutableListOf(name)))
+
+
+//        db.collection("users").document(name).set(listOf(name))
     }
 
-    fun addSubToDo(id: Int) {
+    fun changeTaskList(text: String, id: Int) {
+        val path = db.collection("users").document("$id")
+
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(path)
+//            val list = snapshot.getDocumentReference("listTask")
+//            val list:MutableList<String>? = snapshot.getField("listTask")
+//            val list = snapshot.getField<String>("listTask")
+
+            transaction.update(path, "listTask", text)
+
+        }.addOnSuccessListener {
+            Timber.d(" Swipe changeTaskList success")
+
+        }.addOnFailureListener {
+            Timber.d(" Swipe changeTaskList $it")
+
+        }
     }
+
 
 }

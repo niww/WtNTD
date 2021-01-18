@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
 
         floatingActionButton.setOnClickListener { view ->
             createNewToDo()
-//            Timber.d(" Swipe layoutPosition${database.getData().size}")
             recyclerView.adapter?.notifyDataSetChanged()
 
         }

@@ -13,6 +13,7 @@ import com.example.wtntd.model.data.TaskToDo
 import com.example.wtntd.model.data.firestore.FireStore
 import com.example.wtntd.model.data.room.AppDataBase
 import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     //    val database = FireStore.instance()
     var listTask = mutableListOf<RoomTaskToDo>()
+    val dataBase = App().getInstance().getDataBase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +41,7 @@ class MainActivity : AppCompatActivity() {
         Thread {
             Timber.d("Roomtest ${Thread.currentThread().name}")
 
-            val db = Room.databaseBuilder(this, AppDataBase::class.java, "database").build()
-            val taskDao = db.getRoomTask()
+            val taskDao = dataBase.getRoomTask()
 
             Timber.d("Roomtest ${taskDao.getAll()}")
 
@@ -103,10 +104,16 @@ class MainActivity : AppCompatActivity() {
                 Thread {
                     Timber.d("Roomtest ${Thread.currentThread().name}")
 
-                    val db = Room.databaseBuilder(this, AppDataBase::class.java, "database").build()
-                    val taskDao = db.getRoomTask()
+                    val taskDao = dataBase.getRoomTask()
 
-                    taskDao.insert(RoomTaskToDo((taskDao.getAll().size+1).toString(), editText.text.toString()))
+
+                    taskDao.insert(
+                        RoomTaskToDo(
+                            (taskDao.getAll().size + 1).toLong(),
+                            editText.text.toString()
+                        )
+                    )
+
                     listTask.clear()
 
                     listTask.addAll(taskDao.getAll())

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class RoomTaskToDo(
-    @PrimaryKey val uid :String,
+    @PrimaryKey val uid :Long,
     val task: String
 //    val listTask: MutableList<String>
     )

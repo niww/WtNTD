@@ -1,4 +1,4 @@
-package com.example.wtntd.data
+package com.example.wtntd.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
+class ChildNoteItemAdapter(val listNotes: MutableList<String>) :
+    RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildNoteItemViewHolder {
-
-        return ChildNoteItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.child_recycler_view,parent,false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= ChildNoteItemViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.child_recycler_view, parent, false)
+        )
 
     override fun getItemCount(): Int {
         return listNotes.size
@@ -26,7 +26,7 @@ class ChildNoteItemAdapter(val listNotes:MutableList<String>): RecyclerView.Adap
         holder.childtextNoteItem.text = listNotes[position]
     }
 
-    inner class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val childtextNoteItem = itemView.findViewById<TextView>(R.id.childTextNote)
 

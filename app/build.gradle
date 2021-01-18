@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 
 

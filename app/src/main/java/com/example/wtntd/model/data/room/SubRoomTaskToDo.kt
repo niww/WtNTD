@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
 )
 data class SubRoomTaskToDo(
     @PrimaryKey
-    val uid: Long,
+    val id: Long,
 
     @ColumnInfo(name = "uid_sub")
     val uidSub: Long,

@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
+import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
-import com.example.wtntd.model.data.database.GetDataBaseByThread
 import com.example.wtntd.model.data.database.IGetDataBase
 import com.example.wtntd.ui.swipe.AddSwipe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     //    val database = FireStore.instance()
     var listTask = mutableListOf<RoomTaskToDo>()
-    val dataBase:IGetDataBase = GetDataBaseByThread()
+    val dataBase:IGetDataBase = GetDBByLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +41,10 @@ class MainActivity : AppCompatActivity() {
             layoutManager = linearLayoutManager
             adapter = NoteItemAdapter(listTask) {
                 Timber.d(" ListTask test${it.task}")
+//                dataBase.getDB().getRoomTask().delete(it)
             }
         }
+
         NoteItemAdapter(listTask).notifyDataSetChanged()
 
         val swipe2 = AddSwipe()

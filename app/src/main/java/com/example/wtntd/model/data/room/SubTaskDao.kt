@@ -1,11 +1,12 @@
 package com.example.wtntd.model.data.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface SubTaskDao {
     @Query("SELECT * FROM subroomtasktodo")
-    fun getAll():List<SubRoomTaskToDo>
+    fun getAll(): LiveData<List<SubRoomTaskToDo>>
 
     @Insert
     fun insert(subRoomTaskToDo: SubRoomTaskToDo)

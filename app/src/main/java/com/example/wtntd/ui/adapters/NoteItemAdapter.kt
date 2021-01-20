@@ -30,8 +30,10 @@ class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val onTaskClick: ((room
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listNotes[position].task
-        holder.textNoteItem.setOnClickListener {
+        holder.textNoteItem.setOnLongClickListener {
             onTaskClick?.invoke(listNotes[position])
+            notifyDataSetChanged()
+            return@setOnLongClickListener true
         }
 
     }

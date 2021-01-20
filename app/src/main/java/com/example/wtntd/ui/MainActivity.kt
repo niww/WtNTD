@@ -1,5 +1,8 @@
 package com.example.wtntd.ui
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -7,40 +10,73 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.model.data.firestore.FireStore
+import com.example.wtntd.model.data.database.GetDBByLiveData
+import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
+import com.example.wtntd.model.data.database.IGetDataBase
+import com.example.wtntd.ui.swipe.AddSwipe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val database = FireStore.instance()
+    //    val database = FireStore.instance()
+    var listTask = mutableListOf<RoomTaskToDo>()
+    val dataBase:IGetDataBase = GetDBByLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Timber.plant(Timber.DebugTree())
-
         setSupportActionBar(findViewById(R.id.app_bar))
-        supportActionBar?.let {
-            title = database.getUserName()
-        }
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        val adapterNote = NoteItemAdapter(database.getData(), this@MainActivity)
+
+        dataBase.loadDB(listTask)
+
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = adapterNote
+            adapter = NoteItemAdapter(listTask) {
+                Timber.d(" ListTask test${it.task}")
+//                dataBase.getDB().getRoomTask().delete(it)
+            }
         }
-        adapterNote.notifyDataSetChanged()
+
+        NoteItemAdapter(listTask).notifyDataSetChanged()
+
+        val swipe2 = AddSwipe()
+
+        val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                c.drawColor(Color.parseColor("#D53A47"))
+                val paint = Paint()
+                paint.color = Color.parseColor("#FFFFFFFF")
+                c.drawText("Test",0,4,dX,dY, paint)
+
+            }
 
 
-        val swipe = object : ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -50,14 +86,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                if (direction == ItemTouchHelper.LEFT){
+                if (direction == ItemTouchHelper.LEFT) {
 
-                    createSubToDo(viewHolder.adapterPosition)
+
                     recyclerView.adapter?.notifyDataSetChanged()
 
-                    Timber.d(" Swipe adapterPosition ${viewHolder.adapterPosition  }")
-                    Timber.d(" Swipe layoutPosition${viewHolder.layoutPosition }")
-                    Timber.d("  database.getData().size${database.getData().size }")
+                    Timber.d(" Swipe adapterPosition ${viewHolder.adapterPosition}")
+                    Timber.d(" Swipe layoutPosition${viewHolder.layoutPosition}")
                 }
             }
         }
@@ -65,9 +100,8 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(swipe)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        floatingActionButton.setOnClickListener {view->
+        floatingActionButton.setOnClickListener { view ->
             createNewToDo()
-            Timber.d(" Swipe layoutPosition${database.getData().size}")
             recyclerView.adapter?.notifyDataSetChanged()
 
         }
@@ -75,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun createNewToDo(){
+    fun createNewToDo() {
         val editText = EditText(this)
         MaterialAlertDialogBuilder(this)
             .setTitle("New ToDo")
@@ -83,21 +117,13 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
             .setPositiveButton(
                 "Ok"
-            ) { dialogInterface, i -> database.saveData(editText.text.toString(), database.getData().size +1) }
+            ) { dialogInterface, i ->
+//
+               dataBase.saveDataToDB(listTask,editText)
+            }
             .show()
     }
 
-    fun createSubToDo(id:Int){
-        val editText = EditText(this)
-        MaterialAlertDialogBuilder(this)
-            .setTitle("New SudToDo")
-            .setView(editText)
-            .setNegativeButton("Cancel", { dialogInterface, i -> "Ok" })
-            .setPositiveButton(
-                "Ok"
-            ) { dialogInterface, i -> database.changeTaskList(editText.text.toString(), id) }
-            .show()
-    }
 
 }
 

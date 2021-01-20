@@ -13,7 +13,7 @@ import com.example.wtntd.model.data.TaskToDo
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class NoteItemAdapter(val listNotes: List<RoomTaskToDo>) :
+class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val onTaskClick: ((roomTaskToDo: RoomTaskToDo)-> Unit)?= null ) :
     RecyclerView.Adapter<NoteItemAdapter.NoteItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -30,12 +30,16 @@ class NoteItemAdapter(val listNotes: List<RoomTaskToDo>) :
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listNotes[position].task
+        holder.textNoteItem.setOnClickListener {
+            onTaskClick?.invoke(listNotes[position])
+        }
 
     }
 
     class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
+
 
     }
 }

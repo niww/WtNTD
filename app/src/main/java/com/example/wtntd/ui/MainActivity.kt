@@ -1,5 +1,8 @@
 package com.example.wtntd.ui
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -9,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
-import com.example.wtntd.model.data.database.GetDataBase
+import com.example.wtntd.model.data.database.GetDataBaseByThread
 import com.example.wtntd.model.data.database.IGetDataBase
+import com.example.wtntd.ui.swipe.AddSwipe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -19,32 +23,57 @@ class MainActivity : AppCompatActivity() {
 
     //    val database = FireStore.instance()
     var listTask = mutableListOf<RoomTaskToDo>()
+    val dataBase:IGetDataBase = GetDataBaseByThread()
 
-    val dataBase:IGetDataBase = GetDataBase()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        Timber.plant(Timber.DebugTree())
 
         setSupportActionBar(findViewById(R.id.app_bar))
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
-
-
         dataBase.loadDB(listTask)
 
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = NoteItemAdapter(listTask)
+            adapter = NoteItemAdapter(listTask) {
+                Timber.d(" ListTask test${it.task}")
+            }
         }
         NoteItemAdapter(listTask).notifyDataSetChanged()
 
+        val swipe2 = AddSwipe()
 
         val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                c.drawColor(Color.parseColor("#D53A47"))
+                val paint = Paint()
+                paint.color = Color.parseColor("#FFFFFFFF")
+                c.drawText("Test",0,4,dX,dY, paint)
+
+            }
+
 
             override fun onMove(
                 recyclerView: RecyclerView,

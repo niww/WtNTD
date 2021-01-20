@@ -6,7 +6,7 @@ import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
 import timber.log.Timber
 
-class GetDataBase:IGetDataBase {
+class GetDataBaseByThread:IGetDataBase {
 
     val dataBase = App().getInstance().getDataBase()
 

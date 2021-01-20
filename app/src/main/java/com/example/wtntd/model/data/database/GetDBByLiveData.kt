@@ -3,6 +3,7 @@ package com.example.wtntd.model.data.database
 import android.widget.EditText
 import com.example.wtntd.model.data.room.AppDataBase
 import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
 import timber.log.Timber
 import java.util.*
@@ -36,8 +37,20 @@ class GetDBByLiveData : IGetDataBase {
                     editText.text.toString()
                 )
             )
+            dataBase.getSubRoomTask().insert(
+                SubRoomTaskToDo(
+                    list.size.toLong()+1,
+                    list.size.toLong()+1,
+                    editText.text.toString()
+                )
+            )
+
         }.start()
 
+            dataBase.getSubRoomTask().getAll().observeForever {
+                Timber.d("ListTask size in thread ${it}")
+
+            }
 
     }
 }

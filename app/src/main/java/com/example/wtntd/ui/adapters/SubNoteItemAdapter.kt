@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 
-class ChildNoteItemAdapter(val listNotes: MutableList<String>) :
-    RecyclerView.Adapter<ChildNoteItemAdapter.ChildNoteItemViewHolder>() {
+class SubNoteItemAdapter(val listNotes: MutableList<String>) :
+    RecyclerView.Adapter<SubNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= ChildNoteItemViewHolder(

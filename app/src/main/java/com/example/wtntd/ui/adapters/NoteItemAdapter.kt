@@ -41,7 +41,7 @@ class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val onTaskClick: ((room
     class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
-
+        val subRV =  itemView.findViewById<RecyclerView>(R.id.sub_rv)
 
     }
 }

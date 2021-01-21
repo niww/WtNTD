@@ -1,6 +1,4 @@
-package com.example.wtntd.model.data
-
-import java.util.*
+package com.example.wtntd.data
 
 //open class User(val UserName: String,val Email: String)
 //open class User(UserName: String, Email:String)

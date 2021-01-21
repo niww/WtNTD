@@ -6,6 +6,7 @@ import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             layoutManager = linearLayoutManager
             adapter = NoteItemAdapter(listTask) {
                 Timber.d(" ListTask test${it.task}")
+                Toast.makeText(this@MainActivity," ${it.task}", Toast.LENGTH_SHORT).show()
 //                dataBase.getDB().getRoomTask().delete(it)
             }
         }

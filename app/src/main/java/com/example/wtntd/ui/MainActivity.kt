@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 if (direction == ItemTouchHelper.LEFT) {
 
-
                     recyclerView.adapter?.notifyDataSetChanged()
 
                     Timber.d(" Swipe adapterPosition ${viewHolder.adapterPosition}")

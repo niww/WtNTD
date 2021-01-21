@@ -9,17 +9,17 @@ import androidx.room.PrimaryKey
 @Entity(
     foreignKeys = [ForeignKey(
         entity = RoomTaskToDo::class,
-        parentColumns = ["uid"],
-        childColumns = ["uid_sub"]
+        parentColumns = ["id"],
+        childColumns = ["id_sub"]
     )]
-)
-data class SubRoomTaskToDo(
-    @PrimaryKey
-    val id: Long,
+) class SubRoomTaskToDo(
 
-    @ColumnInfo(name = "uid_sub")
-    val uidSub: Long,
+    @ColumnInfo(name = "id_sub")
+    val idSub: Long,
     @ColumnInfo(name = "SubTasks")
     val task: String
 //    val listTask: MutableList<String>
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}

@@ -1,12 +1,10 @@
 package com.example.wtntd.model.data.database
 
 import android.widget.EditText
-import com.example.wtntd.model.data.room.AppDataBase
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
 import timber.log.Timber
-import java.util.*
 
 class GetDBByLiveData : IGetDataBase {
 
@@ -41,7 +39,6 @@ class GetDBByLiveData : IGetDataBase {
             dataBase.getSubRoomTask().insert(
                 SubRoomTaskToDo(
                     list.size.toLong()+1,
-                    list.size.toLong()+1,
                     editText.text.toString()
                 )
             )
@@ -54,4 +51,23 @@ class GetDBByLiveData : IGetDataBase {
             }
 
     }
+
+    override fun insertSubToDo(subRoomTaskToDo: SubRoomTaskToDo){
+        Thread{
+            dataBase.getSubRoomTask().insert(subRoomTaskToDo)
+        }.start()
+    }
+
+    override fun getSubListTask(roomTaskToDo: RoomTaskToDo, subList:MutableList<SubRoomTaskToDo>){
+
+        Timber.d("ListTask size in thread ${subList}")
+
+        dataBase.getSubRoomTask().getSubListById(roomTaskToDo.id).observeForever { list->
+            list.map { subList.add(it) }
+        }
+
+    }
+
+
+
 }

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     //    val database = FireStore.instance()
     var listTask = mutableListOf<RoomTaskToDo>()
-    val dataBase:IGetDataBase = GetDBByLiveData()
+    val dataBase: IGetDataBase = GetDBByLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,18 +40,21 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = NoteItemAdapter(listTask) {
-                Timber.d(" ListTask test${it.task}")
-                Toast.makeText(this@MainActivity," ${it.task}", Toast.LENGTH_SHORT).show()
-//                dataBase.getDB().getRoomTask().delete(it)
-            }
+            adapter = NoteItemAdapter(
+                listTask,
+                {
+                    Timber.d(" ListTask test${it.task}")
+                    Toast.makeText(this@MainActivity, " ${it.task}", Toast.LENGTH_SHORT).show()
+                }, dataBase
+            )
         }
+        recyclerView.adapter?.notifyDataSetChanged()
 
-        NoteItemAdapter(listTask).notifyDataSetChanged()
+//        NoteItemAdapter(listTask, null ,dataBase).notifyDataSetChanged()
 
         val swipe2 = AddSwipe()
 
-        val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+        val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             override fun onChildDraw(
                 c: Canvas,
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 c.drawColor(Color.parseColor("#D53A47"))
                 val paint = Paint()
                 paint.color = Color.parseColor("#FFFFFFFF")
-                c.drawText("Test",0,4,dX,dY, paint)
+                c.drawText("Test", 0, 4, dX, dY, paint)
 
             }
 
@@ -121,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 "Ok"
             ) { dialogInterface, i ->
 //
-               dataBase.saveDataToDB(listTask,editText)
+                dataBase.saveDataToDB(listTask, editText)
             }
             .show()
     }

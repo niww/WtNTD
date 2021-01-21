@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
+import com.example.wtntd.model.data.room.SubRoomTaskToDo
 
-class SubNoteItemAdapter(val listNotes: MutableList<String>) :
+class SubNoteItemAdapter(val subList:List<SubRoomTaskToDo>) :
     RecyclerView.Adapter<SubNoteItemAdapter.ChildNoteItemViewHolder>() {
 
 
@@ -16,14 +17,12 @@ class SubNoteItemAdapter(val listNotes: MutableList<String>) :
         )
 
     override fun getItemCount(): Int {
-        return listNotes.size
-//        return Random.nextInt() //fixme
-//        return 1
+        return subList.size
     }
 
     override fun onBindViewHolder(holder: ChildNoteItemViewHolder, position: Int) {
 
-        holder.childtextNoteItem.text = listNotes[position]
+        holder.childtextNoteItem.text = subList[position].task
     }
 
     class ChildNoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

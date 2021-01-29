@@ -26,6 +26,15 @@ class GetDBByLiveData : IGetDataBase {
         }
     }
 
+    override fun loadListToDo(list: MutableList<SubRoomTaskToDo>, uid: Long) {
+        dataBase.getSubRoomTask().getByUid(uid).observeForever { l->
+            l.map { list.add(it) }
+
+        }
+    }
+
+
+
     override fun saveDataToDB(list: MutableList<RoomTaskToDo>, editText: EditText) {
 
         Thread {

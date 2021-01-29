@@ -7,9 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.example.wtntd.model.data.room.SubRoomTaskToDo
 
-class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val clickOnTask: ((roomTaskToDo: RoomTaskToDo)-> Unit)?= null ) :
-    RecyclerView.Adapter<NoteItemAdapter.NoteItemViewHolder>() {
+class NoteListItemAdapter(val listNotes: List<SubRoomTaskToDo>, val clickOnTask: ((subRoomTaskToDo: SubRoomTaskToDo)-> Unit)?= null ) :
+    RecyclerView.Adapter<NoteListItemAdapter.NoteItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         NoteItemViewHolder(

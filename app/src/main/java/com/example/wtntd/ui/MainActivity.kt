@@ -1,5 +1,6 @@
 package com.example.wtntd.ui
 
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -41,66 +42,16 @@ class MainActivity : AppCompatActivity() {
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = NoteItemAdapter(listTask) {
-                Timber.d(" ListTask test${it.task}")
+                Timber.d(" ListTask test - ${it.task}")
+                Timber.d(" ListTask test - ${it.uid}")
                 Toast.makeText(this@MainActivity," ${it.task}", Toast.LENGTH_SHORT).show()
 //                dataBase.getDB().getRoomTask().delete(it)
+
+               val intent =  Intent(this@MainActivity,ListToDo::class.java)
+                intent.putExtra("ListToDo", it.uid)
+                context.startActivity(intent)
             }
         }
-
-        NoteItemAdapter(listTask).notifyDataSetChanged()
-
-        val swipe2 = AddSwipe()
-
-        val swipe = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
-
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
-                c.drawColor(Color.parseColor("#D53A47"))
-                val paint = Paint()
-                paint.color = Color.parseColor("#FFFFFFFF")
-                c.drawText("Test",0,4,dX,dY, paint)
-
-            }
-
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                if (direction == ItemTouchHelper.LEFT) {
-
-
-                    recyclerView.adapter?.notifyDataSetChanged()
-
-                    Timber.d(" Swipe adapterPosition ${viewHolder.adapterPosition}")
-                    Timber.d(" Swipe layoutPosition${viewHolder.layoutPosition}")
-                }
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(swipe)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         floatingActionButton.setOnClickListener { view ->
             createNewToDo()

@@ -7,6 +7,7 @@ import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
 import timber.log.Timber
 import java.util.*
+import kotlin.random.Random
 
 class GetDBByLiveData : IGetDataBase {
 
@@ -28,12 +29,25 @@ class GetDBByLiveData : IGetDataBase {
 
     override fun loadListToDo(list: MutableList<SubRoomTaskToDo>, uid: Long) {
         dataBase.getSubRoomTask().getByUid(uid).observeForever { l->
+            list.clear()
             l.map { list.add(it) }
 
         }
     }
 
 
+    override fun saveToDO(editText: EditText, uid: Long) {
+        Thread {
+            dataBase.getSubRoomTask().insert(
+                SubRoomTaskToDo(
+                    uid+1000+ Random.nextLong(1000L),// fixme
+                    uid,
+                    editText.text.toString()
+                )
+            )
+
+        }.start()
+    }
 
     override fun saveDataToDB(list: MutableList<RoomTaskToDo>, editText: EditText) {
 

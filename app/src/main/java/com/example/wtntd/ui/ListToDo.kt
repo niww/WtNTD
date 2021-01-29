@@ -2,6 +2,7 @@ package com.example.wtntd.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,8 +43,14 @@ class ListToDo : AppCompatActivity() {
             adapter = NoteListItemAdapter(list) {
                 Timber.d(" ListTask test - ${it.task}")
                 Toast.makeText(this@ListToDo," ${it.task}", Toast.LENGTH_SHORT).show()
-//
+
             }
+        }
+
+
+        add_new_todo.setOnClickListener {
+            dataBase.saveToDO(new_todo, toDoId)
+            NoteListItemAdapter(list).notifyDataSetChanged()
         }
     }
 }

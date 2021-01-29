@@ -15,7 +15,7 @@ class NoteListItemAdapter(val listNotes: List<SubRoomTaskToDo>, val clickOnTask:
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         NoteItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.parent_recycler_view, parent, false)
+                .inflate(R.layout.recycler_view_list_todo, parent, false)
         )
 
 
@@ -26,15 +26,12 @@ class NoteListItemAdapter(val listNotes: List<SubRoomTaskToDo>, val clickOnTask:
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listNotes[position].task
-        holder.textNoteItem.setOnClickListener {
-            clickOnTask?.invoke(listNotes[position])
-        }
 
     }
 
     class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val textNoteItem = itemView.findViewById<TextView>(R.id.textNote)
+        val textNoteItem = itemView.findViewById<TextView>(R.id.tv_todo)
 
 
     }

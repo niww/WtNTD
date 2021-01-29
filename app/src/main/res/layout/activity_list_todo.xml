@@ -27,15 +27,20 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
 
-        android:id="@+id/floatingActionButton_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="15dp"
-        android:clickable="true"
-        app:elevation="2dp"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+            android:id="@+id/new_todo"
+            android:layout_weight="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/add_new_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

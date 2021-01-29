@@ -14,7 +14,7 @@ class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val clickOnTask: ((room
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         NoteItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.parent_recycler_view, parent, false)
+                .inflate(R.layout.recycler_view, parent, false)
         )
 
 

@@ -1,17 +1,12 @@
 package com.example.wtntd.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.model.data.TaskToDo
 import com.example.wtntd.model.data.room.RoomTaskToDo
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val onTaskClick: ((roomTaskToDo: RoomTaskToDo)-> Unit)?= null ) :
     RecyclerView.Adapter<NoteItemAdapter.NoteItemViewHolder>() {

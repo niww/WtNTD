@@ -21,5 +21,4 @@ data class SubRoomTaskToDo(
     val uidSub: Long,
     @ColumnInfo(name = "SubTasks")
     val task: String
-//    val listTask: MutableList<String>
 )

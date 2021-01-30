@@ -8,6 +8,9 @@ interface SubTaskDao {
     @Query("SELECT * FROM subroomtasktodo")
     fun getAll(): LiveData<List<SubRoomTaskToDo>>
 
+    @Query("SELECT * FROM subroomtasktodo WHERE uid_sub=:uid")
+    fun getByUid(uid:Long): LiveData<List<SubRoomTaskToDo>>
+
     @Insert
     fun insert(subRoomTaskToDo: SubRoomTaskToDo)
 

@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             adapter = NoteItemAdapter(listTask) {
                 Timber.d(" ListTask test - ${it.task}")
                 Timber.d(" ListTask test - ${it.uid}")
-                Toast.makeText(this@MainActivity," ${it.task}", Toast.LENGTH_SHORT).show()
 //                dataBase.getDB().getRoomTask().delete(it)
 
                val intent =  Intent(this@MainActivity,ListToDo::class.java)

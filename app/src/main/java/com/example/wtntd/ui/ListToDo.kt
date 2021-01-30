@@ -26,7 +26,6 @@ class ListToDo : AppCompatActivity() {
         val dataBase: IGetDataBase = GetDBByLiveData()
         var list = mutableListOf<SubRoomTaskToDo>()
 
-        Toast.makeText(this,"{$toDoId}", Toast.LENGTH_SHORT).show()
 
         setSupportActionBar(findViewById(R.id.app_bar_list))
 
@@ -42,7 +41,6 @@ class ListToDo : AppCompatActivity() {
             layoutManager = linearLayoutManager
             adapter = NoteListItemAdapter(list) {
                 Timber.d(" ListTask test - ${it.task}")
-                Toast.makeText(this@ListToDo," ${it.task}", Toast.LENGTH_SHORT).show()
 
             }
         }

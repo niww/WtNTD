@@ -6,10 +6,11 @@
     <androidx.cardview.widget.CardView
 
         android:elevation="3dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <androidx.appcompat.widget.AppCompatTextView
+
         android:id="@+id/textNote"
         android:textStyle="bold"
         android:layout_margin="5dp"

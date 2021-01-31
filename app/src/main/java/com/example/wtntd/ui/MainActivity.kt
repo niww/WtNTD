@@ -23,7 +23,6 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
-    //    val database = FireStore.instance()
     var listTask = mutableListOf<RoomTaskToDo>()
     val dataBase:IGetDataBase = GetDBByLiveData()
 
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
                val intent =  Intent(this@MainActivity,ListToDo::class.java)
                 intent.putExtra("ListToDo", it.uid)
+                intent.putExtra("NameListToDo", it.task)
                 context.startActivity(intent)
             }
         }
@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(
                 "Ok"
             ) { dialogInterface, i ->
-//
                dataBase.saveDataToDB(listTask,editText)
             }
             .show()

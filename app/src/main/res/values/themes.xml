@@ -14,6 +14,7 @@
     </style>
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextColor">@android:color/white</item>
+        <item name="iconTint">@color/white</item>
     </style>
 
     <style name="FloatingButton" parent="Widget.MaterialComponents.FloatingActionButton">

@@ -1,13 +1,18 @@
 package com.example.wtntd.ui.adapters
 
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
 import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.google.rpc.context.AttributeContext
 
 class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val clickOnTask: ((roomTaskToDo: RoomTaskToDo)-> Unit)?= null ) :
     RecyclerView.Adapter<NoteItemAdapter.NoteItemViewHolder>() {

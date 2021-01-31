@@ -61,13 +61,6 @@ class GetDBByLiveData : IGetDataBase {
                     editText.text.toString()
                 )
             )
-            dataBase.getSubRoomTask().insert(
-                SubRoomTaskToDo(
-                    list.size.toLong()+1,
-                    list.size.toLong()+1,
-                    editText.text.toString()
-                )
-            )
 
         }.start()
 

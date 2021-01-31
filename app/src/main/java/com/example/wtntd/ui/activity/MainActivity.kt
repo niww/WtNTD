@@ -1,14 +1,9 @@
-package com.example.wtntd.ui
+package com.example.wtntd.ui.activity
 
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.Toast
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
@@ -16,7 +11,6 @@ import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
 import com.example.wtntd.model.data.database.IGetDataBase
-import com.example.wtntd.ui.swipe.AddSwipe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -45,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 Timber.d(" ListTask test - ${it.uid}")
 //                dataBase.getDB().getRoomTask().delete(it)
 
-               val intent =  Intent(this@MainActivity,ListToDo::class.java)
+               val intent =  Intent(this@MainActivity, ListToDo::class.java)
                 intent.putExtra("ListToDo", it.uid)
                 intent.putExtra("NameListToDo", it.task)
                 context.startActivity(intent)
@@ -55,9 +49,7 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton.setOnClickListener { view ->
             createNewToDo()
             recyclerView.adapter?.notifyDataSetChanged()
-
         }
-
     }
 
 

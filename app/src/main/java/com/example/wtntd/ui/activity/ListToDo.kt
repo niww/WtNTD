@@ -1,4 +1,4 @@
-package com.example.wtntd.ui
+package com.example.wtntd.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,6 @@ import com.example.wtntd.model.data.database.IGetDataBase
 import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteListItemAdapter
 import kotlinx.android.synthetic.main.activity_list_todo.*
-import timber.log.Timber
 
 class ListToDo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,16 +34,13 @@ class ListToDo : AppCompatActivity() {
 
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = NoteListItemAdapter(list) {
-                Timber.d(" ListTask test - ${it.task}")
-
-            }
+            adapter = NoteListItemAdapter(list, this@ListToDo)
         }
 
 
         add_new_todo.setOnClickListener {
             dataBase.saveToDO(new_todo, toDoId)
-            NoteListItemAdapter(list).notifyDataSetChanged()
+            NoteListItemAdapter(list, this).notifyDataSetChanged()
         }
     }
 }

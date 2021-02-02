@@ -10,17 +10,24 @@ import com.example.wtntd.R
 import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.database.IGetDataBase
 import com.example.wtntd.model.data.room.SubRoomTaskToDo
+import com.example.wtntd.ui.App
 import com.example.wtntd.ui.adapters.NoteListItemAdapter
 import kotlinx.android.synthetic.main.activity_list_todo.*
+import javax.inject.Inject
 
 class ListToDo : AppCompatActivity() {
+        @Inject lateinit var getDBByLiveData: IGetDataBase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_todo)
 
         val toDoId = intent.getLongExtra("ListToDo", 0L)
         val nameListToDo = intent.getStringExtra("NameListToDo")
-        val dataBase: IGetDataBase = GetDBByLiveData()
+
+        App.component.inject(this)
+
+        val dataBase: IGetDataBase = getDBByLiveData
+
         var list = mutableListOf<SubRoomTaskToDo>()
         val editText = findViewById<EditText>(R.id.new_todo)
 

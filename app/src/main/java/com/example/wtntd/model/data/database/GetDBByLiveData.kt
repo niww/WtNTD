@@ -11,13 +11,13 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
 
-class GetDBByLiveData : IGetDataBase {
+class GetDBByLiveData(val dataBase: AppDataBase) : IGetDataBase {
 
 
 //    val dataBase = App().getInstance().getDataBase()
-    @Inject lateinit var dataBase : AppDataBase
+//    @Inject lateinit var dataBase : AppDataBase
 
-    override fun getDB() = dataBase
+//    override fun getDB() = dataBase
 
     override fun loadDB(list: MutableList<RoomTaskToDo>) {
 

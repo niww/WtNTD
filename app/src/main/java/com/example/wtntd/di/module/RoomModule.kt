@@ -17,4 +17,8 @@ class RoomModule {
         return Room.databaseBuilder(app, AppDataBase::class.java, "database").build()
     }
 
+    @Provides
+    fun getDB(dataBase: AppDataBase): IGetDataBase{
+        return GetDBByLiveData(dataBase)
+    }
 }

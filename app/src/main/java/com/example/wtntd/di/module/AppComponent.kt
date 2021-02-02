@@ -7,9 +7,8 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, AppModule::class,DataBaseModule::class,RoomModule::class])
+@Component(modules = [DataBaseModule::class])
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
-    fun inject(getDBByLiveData: IGetDataBase)
 
 }

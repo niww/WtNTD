@@ -14,8 +14,8 @@ import kotlin.random.Random
 class GetDBByLiveData : IGetDataBase {
 
 
-//    val dataBase = App().getInstance().getDataBase()
-    @Inject lateinit var dataBase : AppDataBase
+    val dataBase = App().getInstance().getDataBase()
+//    @Inject lateinit var dataBase : AppDataBase
 
     override fun getDB() = dataBase
 

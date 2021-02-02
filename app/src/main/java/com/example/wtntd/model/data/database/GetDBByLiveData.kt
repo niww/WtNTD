@@ -1,5 +1,6 @@
 package com.example.wtntd.model.data.database
 
+import android.text.Editable
 import android.widget.EditText
 import com.example.wtntd.model.data.room.AppDataBase
 import com.example.wtntd.model.data.room.RoomTaskToDo
@@ -7,12 +8,15 @@ import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 import kotlin.random.Random
 
 class GetDBByLiveData : IGetDataBase {
 
 
-    val dataBase = App().getInstance().getDataBase()
+//    val dataBase = App().getInstance().getDataBase()
+    @Inject lateinit var dataBase : AppDataBase
+
     override fun getDB() = dataBase
 
     override fun loadDB(list: MutableList<RoomTaskToDo>) {
@@ -36,7 +40,7 @@ class GetDBByLiveData : IGetDataBase {
     }
 
 
-    override fun saveToDO(editText: EditText, uid: Long) {
+    override fun saveToDo(editText: EditText, uid: Long) {
         Thread {
             dataBase.getSubRoomTask().insert(
                 SubRoomTaskToDo(

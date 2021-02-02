@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -40,12 +41,14 @@ class NoteListItemAdapter(val listNotes: List<SubRoomTaskToDo>, val activity: Li
             return@setOnLongClickListener true
         }
 
+
+
     }
 
     class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val textNoteItem = itemView.findViewById<TextView>(R.id.tv_todo)
         val llListToDo = itemView.findViewById<LinearLayout>(R.id.ll_list_todo)
-
+        val checkBox = itemView.findViewById<CheckBox>(R.id.checkbox)
     }
 }

@@ -11,25 +11,34 @@ import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
 import com.example.wtntd.model.data.database.IGetDataBase
+import com.example.wtntd.ui.App
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     var listTask = mutableListOf<RoomTaskToDo>()
-    val dataBase:IGetDataBase = GetDBByLiveData()
+//    val dataBase:IGetDataBase = GetDBByLiveData()
+
+    @Inject lateinit var getDBByLiveData: IGetDataBase
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        App.component.inject(this)
 
         setSupportActionBar(findViewById(R.id.app_bar))
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
-        dataBase.loadDB(listTask)
+//        dataBase.loadDB(listTask)
+        getDBByLiveData.loadDB(listTask)
 
 
         recyclerView.apply {
@@ -62,7 +71,8 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(
                 "Ok"
             ) { dialogInterface, i ->
-               dataBase.saveDataToDB(listTask,editText)
+//                dataBase.saveDataToDB(listTask,editText)
+                getDBByLiveData.saveDataToDB(listTask,editText)
             }
             .show()
     }

@@ -1,6 +1,8 @@
 package com.example.wtntd.ui.activity
 
 import android.os.Bundle
+import android.text.Editable
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +22,7 @@ class ListToDo : AppCompatActivity() {
         val nameListToDo = intent.getStringExtra("NameListToDo")
         val dataBase: IGetDataBase = GetDBByLiveData()
         var list = mutableListOf<SubRoomTaskToDo>()
-
+        val editText = findViewById<EditText>(R.id.new_todo)
 
         setSupportActionBar(findViewById(R.id.app_bar_list))
 
@@ -39,8 +41,9 @@ class ListToDo : AppCompatActivity() {
 
 
         add_new_todo.setOnClickListener {
-            dataBase.saveToDO(new_todo, toDoId)
+            dataBase.saveToDo(editText, toDoId)
             NoteListItemAdapter(list, this).notifyDataSetChanged()
+
         }
     }
 }

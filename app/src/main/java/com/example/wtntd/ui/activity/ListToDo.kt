@@ -1,13 +1,11 @@
 package com.example.wtntd.ui.activity
 
 import android.os.Bundle
-import android.text.Editable
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.database.IGetDataBase
 import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App

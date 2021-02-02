@@ -1,11 +1,9 @@
 package com.example.wtntd.ui
 
 import android.app.Application
-import androidx.room.Room
 import com.example.wtntd.di.module.AppComponent
 import com.example.wtntd.di.module.AppModule
 import com.example.wtntd.di.module.DaggerAppComponent
-import com.example.wtntd.model.data.room.AppDataBase
 import timber.log.Timber
 
 class App : Application() {

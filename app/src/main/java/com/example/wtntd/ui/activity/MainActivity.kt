@@ -7,7 +7,6 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.model.data.database.GetDBByLiveData
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.ui.adapters.NoteItemAdapter
 import com.example.wtntd.model.data.database.IGetDataBase

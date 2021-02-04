@@ -26,7 +26,8 @@ class GetDBByRXJava(val dataBase: AppDataBase) : IGetDataBase {
     @SuppressLint("CheckResult")
     override fun loadDB(list: MutableList<RoomTaskToDo>) {
 
-        dataBase.getRoomTask().getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { roomList ->
+        dataBase.getRoomTask().getAll().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { roomList ->
             Timber.d("LiveDataTest ${Thread.currentThread().name}")
 
             list.clear()
@@ -37,7 +38,8 @@ class GetDBByRXJava(val dataBase: AppDataBase) : IGetDataBase {
     }
 
     override fun loadListToDo(list: MutableList<SubRoomTaskToDo>, uid: Long) {
-        dataBase.getSubRoomTask().getByUid(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe  { l->
+        dataBase.getSubRoomTask().getByUid(uid).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { l ->
             list.clear()
             l.map { list.add(it) }
 
@@ -49,7 +51,7 @@ class GetDBByRXJava(val dataBase: AppDataBase) : IGetDataBase {
         Thread {
             dataBase.getSubRoomTask().insert(
                 SubRoomTaskToDo(
-                    uid+1000+ Random.nextLong(1000L),// fixme
+                    uid + 1000 + Random.nextLong(1000L),// fixme
                     uid,
                     editText.text.toString()
                 )
@@ -66,7 +68,7 @@ class GetDBByRXJava(val dataBase: AppDataBase) : IGetDataBase {
 
             dataBase.getRoomTask().insert(
                 RoomTaskToDo(
-                    list.size.toLong()+1,
+                    list.size.toLong() + 1,
                     editText.text.toString()
                 )
             )

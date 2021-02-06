@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
@@ -17,19 +19,19 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
-    var listTask = mutableListOf<RoomTaskToDo>()
-    val dataBase:IGetDataBase = GetDBByLiveData()
+    val dataBase: IGetDataBase = GetDBByLiveData()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        val listTask = mainViewModel.getList()
 
         setSupportActionBar(findViewById(R.id.app_bar))
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-
-        dataBase.loadDB(listTask)
 
 
         recyclerView.apply {
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 Timber.d(" ListTask test - ${it.uid}")
 //                dataBase.getDB().getRoomTask().delete(it)
 
-               val intent =  Intent(this@MainActivity, ListToDo::class.java)
+                val intent = Intent(this@MainActivity, ListToDo::class.java)
                 intent.putExtra("ListToDo", it.uid)
                 intent.putExtra("NameListToDo", it.task)
                 context.startActivity(intent)
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(
                 "Ok"
             ) { dialogInterface, i ->
-               dataBase.saveDataToDB(listTask,editText)
+                dataBase.saveDataToDB(editText)
             }
             .show()
     }

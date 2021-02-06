@@ -49,15 +49,13 @@ class GetDBByLiveData : IGetDataBase {
         }.start()
     }
 
-    override fun saveDataToDB(list: MutableList<RoomTaskToDo>, editText: EditText) {
+    override fun saveDataToDB(editText: EditText) {
 
         Thread {
             Timber.d("ListTask thread ${Thread.currentThread().name}")
-            Timber.d("ListTask size in thread ${list.size}")
 
             dataBase.getRoomTask().insert(
                 RoomTaskToDo(
-                    list.size.toLong()+1,
                     editText.text.toString()
                 )
             )

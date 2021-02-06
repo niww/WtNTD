@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class RoomTaskToDo(
-    @PrimaryKey
-    val uid :Long ,
+
     val task: String
-    )
+) {
+    @PrimaryKey(autoGenerate = true)
+    var uid: Long =0
+}

@@ -4,13 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wtntd.R
-import com.example.wtntd.model.data.database.GetDBByLiveData
-import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.example.wtntd.model.data.database.GetDataBase
 import com.example.wtntd.ui.adapters.NoteItemAdapter
 import com.example.wtntd.model.data.database.IGetDataBase
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,7 +17,7 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
-    val dataBase: IGetDataBase = GetDBByLiveData()
+    val dataBase: IGetDataBase = GetDataBase()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +35,8 @@ class MainActivity : AppCompatActivity() {
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = NoteItemAdapter(listTask) {
-                Timber.d(" ListTask test - ${it.task}")
-                Timber.d(" ListTask test - ${it.uid}")
-//                dataBase.getDB().getRoomTask().delete(it)
 
-                val intent = Intent(this@MainActivity, ListToDo::class.java)
+                val intent = Intent(this@MainActivity, ListToDoActivity::class.java)
                 intent.putExtra("ListToDo", it.uid)
                 intent.putExtra("NameListToDo", it.task)
                 context.startActivity(intent)

@@ -21,4 +21,7 @@ data class SubRoomTaskToDo(
     val uidSub: Long,
     @ColumnInfo(name = "SubTasks")
     val task: String
-)
+){
+    var isChecked = false
+
+}

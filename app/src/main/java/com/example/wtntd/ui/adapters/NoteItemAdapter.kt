@@ -31,8 +31,7 @@ class NoteItemAdapter(val listNotes: List<RoomTaskToDo>, val clickOnTask: ((room
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
 
         holder.textNoteItem.text = listNotes[position].task
-        holder.tvListStatus.text = "$position/${listNotes[position].uid}"
-
+        holder.tvListStatus.text = "${listNotes[position].openToDo}/${listNotes[position].closedToDo}"
 
         holder.cardView.setOnClickListener {
             clickOnTask?.invoke(listNotes[position])

@@ -10,5 +10,6 @@ interface IGetDataBase {
     fun loadDB(list : MutableList<RoomTaskToDo>)
     fun loadListToDo(list : MutableList<SubRoomTaskToDo>, uid: Long)
     fun saveDataToDB(editText: EditText)
-    fun saveToDO(editText: EditText, uid: Long)
+    fun saveToDO(string: String, uid: Long)
+    fun updateToDo(subRoomTaskToDo: SubRoomTaskToDo)
 }

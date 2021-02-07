@@ -11,4 +11,8 @@ data class RoomTaskToDo(
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Long =0
+
+    var openToDo: Int = 0
+    var closedToDo: Int = 0
+
 }

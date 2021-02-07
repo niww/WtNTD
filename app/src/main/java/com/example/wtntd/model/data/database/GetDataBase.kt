@@ -56,7 +56,6 @@ class GetDataBase : IGetDataBase {
         Thread {
             dataBase.getSubRoomTask().insert(
                 SubRoomTaskToDo(
-                    uid + 1000 + Random.nextLong(1000L),// fixme
                     uid,
                     string
                 )
@@ -114,6 +113,7 @@ class GetDataBase : IGetDataBase {
 
     override fun renameToDo(id:Long, newName:String) {
         Thread {
+            //fixme
             val getTaskToDo = dataBase.getRoomTask().getListNameByUid(id)
             dataBase.getRoomTask().update(getTaskToDo.copy(task = newName))
             Timber.d("TimberGetTaskToDo ${getTaskToDo}")

@@ -15,14 +15,16 @@ import androidx.room.PrimaryKey
     )]
 )
 data class SubRoomTaskToDo(
-    @PrimaryKey
-    val id: Long,
 
     @ColumnInfo(name = "uid_sub")
     val uidSub: Long,
     @ColumnInfo(name = "SubTasks")
     val task: String
 ){
+    @PrimaryKey(autoGenerate = true)
+    var uid: Long = 0
+
+
     var isChecked = false
 
 }

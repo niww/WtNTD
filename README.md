@@ -7,6 +7,6 @@ Fast todo list
 <img alt="Second screen" src="https://github.com/niww/niww.github.io/blob/master/img3.jpg" width="200" height="450"> </img>
 
 Use
-Kotlin
-Room
-MVVM
+<ul>Kotlin</ul>
+<ul>Room</ul>
+<ul>MVVM</ul>

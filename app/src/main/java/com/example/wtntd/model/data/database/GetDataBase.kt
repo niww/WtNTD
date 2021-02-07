@@ -1,8 +1,6 @@
 package com.example.wtntd.model.data.database
 
 import android.widget.EditText
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
 import com.example.wtntd.model.data.room.RoomTaskToDo
 import com.example.wtntd.model.data.room.SubRoomTaskToDo
 import com.example.wtntd.ui.App
@@ -97,4 +95,32 @@ class GetDataBase : IGetDataBase {
         }.start()
 
     }
+
+    override fun deleteSubToDo(list: MutableList<SubRoomTaskToDo>) {
+
+        list.forEach {
+            Thread {
+                dataBase.getSubRoomTask().delete(it)
+            }.start()
+        }
+    }
+
+    override fun deleteToDo(id: Long) {
+        Thread {
+            val findRoomTaskToDo = dataBase.getRoomTask().getListNameByUid(id)
+            dataBase.getRoomTask().delete(findRoomTaskToDo)
+        }.start()
+    }
+
+    override fun renameToDo(id:Long, newName:String) {
+        Thread {
+            val getTaskToDo = dataBase.getRoomTask().getListNameByUid(id)
+            dataBase.getRoomTask().update(getTaskToDo.copy(task = newName))
+            Timber.d("TimberGetTaskToDo ${getTaskToDo}")
+            Timber.d("TimberGetTaskToDo ${getTaskToDo.copy(task = "test").task}")
+
+        }.start()
+    }
+
+
 }

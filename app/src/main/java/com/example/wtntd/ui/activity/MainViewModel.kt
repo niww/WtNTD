@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.wtntd.model.data.database.GetDataBase
 import com.example.wtntd.model.data.database.IGetDataBase
 import com.example.wtntd.model.data.room.RoomTaskToDo
+import com.example.wtntd.model.data.room.SubRoomTaskToDo
 
 class MainViewModel: ViewModel() {
 
@@ -13,6 +14,11 @@ class MainViewModel: ViewModel() {
     fun getList(): MutableList<RoomTaskToDo> {
         dataBase.loadDB(listTask)
         return listTask
+    }
+
+    fun deleteToDo(list: MutableList<SubRoomTaskToDo>){
+        dataBase.deleteSubToDo(list)
+
     }
 
 }

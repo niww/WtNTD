@@ -10,7 +10,8 @@ import androidx.room.PrimaryKey
     foreignKeys = [ForeignKey(
         entity = RoomTaskToDo::class,
         parentColumns = ["uid"],
-        childColumns = ["uid_sub"]
+        childColumns = ["uid_sub"],
+        onDelete = CASCADE
     )]
 )
 data class SubRoomTaskToDo(

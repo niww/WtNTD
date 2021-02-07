@@ -12,4 +12,7 @@ interface IGetDataBase {
     fun saveDataToDB(editText: EditText)
     fun saveToDO(string: String, uid: Long)
     fun updateToDo(subRoomTaskToDo: SubRoomTaskToDo)
+    fun deleteSubToDo(list: MutableList<SubRoomTaskToDo>)
+    fun deleteToDo(id: Long)
+    fun renameToDo(id:Long, newName:String)
 }

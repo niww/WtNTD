@@ -65,6 +65,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onResume() {
+        rv.adapter?.notifyDataSetChanged()
+        super.onResume()
+    }
 }
 
 

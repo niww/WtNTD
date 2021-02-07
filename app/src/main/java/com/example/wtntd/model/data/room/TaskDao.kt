@@ -9,6 +9,9 @@ interface TaskDao {
     @Query("SELECT * FROM roomtasktodo")
     fun getAll(): LiveData<List<RoomTaskToDo>>
 
+    @Query("SELECT * FROM roomtasktodo WHERE uid=:id")
+    fun getListNameByUid(id: Long): RoomTaskToDo
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(roomTaskToDo: RoomTaskToDo)
 

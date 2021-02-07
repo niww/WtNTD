@@ -1,5 +1,5 @@
 # WtNTD
-Simple todo list
+Fast todo list
 
 Use
 Kotlin
